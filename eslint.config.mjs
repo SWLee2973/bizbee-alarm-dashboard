@@ -4,6 +4,7 @@ import { FlatCompat } from "@eslint/eslintrc";
 import stylisticJs from "@stylistic/eslint-plugin";
 import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
+import reactHooks from "eslint-plugin-react-hooks";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,6 +34,12 @@ export default tseslint.config(
     semi: true,
     commaDangle: "always-multiline",
   }),
+  {
+    plugins: {
+      "react-hooks": reactHooks,
+    },
+    rules: reactHooks.configs.recommended.rules,
+  },
   {
     plugins: {
       "@stylistic": stylisticJs,
