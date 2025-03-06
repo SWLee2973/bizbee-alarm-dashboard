@@ -15,7 +15,7 @@ const compat = new FlatCompat({
 
 export default tseslint.config(
   {
-    ignores: [".next/*", "node_modules/*", "!src/**/*"],
+    ignores: [".next/*", "node_modules/*"],
   },
   eslint.configs.recommended,
   tseslint.configs.strictTypeChecked,

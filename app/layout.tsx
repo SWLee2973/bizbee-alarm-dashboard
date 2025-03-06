@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
-import "./globals.css";
+import "@/globals.css";
 import NavBar from "@/components/ui/NavBar";
 import Header from "@/components/ui/Header";
 const notoSans = Noto_Sans_KR({

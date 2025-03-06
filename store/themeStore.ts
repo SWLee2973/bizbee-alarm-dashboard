@@ -1,4 +1,5 @@
 import { theme } from "@/constants";
+import LocalStorage from "@/utils/localStorage";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -11,11 +12,13 @@ const themeStore = create<IThemeStore>()(
   persist(
     (set) => ({
       themeName: "default",
-      setThemeName: (themeName: (typeof theme)[number] | "default") =>
-        set({ themeName }),
+      setThemeName: (themeName: (typeof theme)[number] | "default") => {
+        set({ themeName });
+        LocalStorage.setItem("theme", themeName);
+      },
     }),
     {
-      name: "theme",
+      name: "themeStore",
     }
   )
 );
