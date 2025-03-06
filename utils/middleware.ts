@@ -1,19 +1,19 @@
+import { getSession } from "@/serverActions/auth";
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { match } from "path-to-regexp";
-import { auth } from "@/utils/auth";
 
-const matchersForAuth = ["/dashboard/*", "/myaccount/*", "/settings/*"];
+const matchersForAuth = ["/dashboard/*"];
 const matchersForLogIn = ["/login/*"];
 export async function middleware(request: NextRequest) {
   if (isMatch(request.nextUrl.pathname, matchersForAuth)) {
-    return (await auth())
+    return (await getSession())
       ? NextResponse.next()
       : NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (isMatch(request.nextUrl.pathname, matchersForLogIn)) {
-    return (await auth())
+    return (await getSession())
       ? NextResponse.redirect(new URL("/", request.url))
       : NextResponse.next();
   }

@@ -1,4 +1,3 @@
-import { default as data } from "./data";
-import { default as theme } from "./theme";
-
-export { data, theme };
+export { default as data } from "./data";
+export { default as links } from "./links";
+export { default as theme } from "./theme";

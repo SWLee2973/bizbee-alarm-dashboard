@@ -1,3 +1,1 @@
-import { default as themeStore } from "./themeStore";
-
-export { themeStore };
+export { default as themeStore } from "./themeStore";

@@ -1,13 +1,6 @@
-import NextAuth from "next-auth";
+import NextAuth, { NextAuthConfig } from "next-auth";
 
-export const {
-  handlers,
-  signIn,
-  signOut,
-  auth,
-  unstable_update: update,
-} = NextAuth({
-  providers: [],
+const authConfig = {
   session: {
     strategy: "jwt",
     maxAge: 60 * 60 * 24 * 7,
@@ -26,4 +19,16 @@ export const {
       return session;
     },
   },
+  providers: [],
+} satisfies NextAuthConfig;
+
+export const {
+  handlers,
+  signIn,
+  signOut,
+  auth,
+  unstable_update: update,
+} = NextAuth({
+  ...authConfig,
+  providers: [],
 });
