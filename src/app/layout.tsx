@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
 import "./globals.css";
+import NavBar from "@/components/ui/NavBar";
+import Header from "@/components/ui/Header";
 const notoSans = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
   subsets: ["latin"],
@@ -18,7 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSans.variable} antialiased`}>{children}</body>
+      <body className={`${notoSans.variable} antialiased md:flex`}>
+        <NavBar />
+        <div className="flex-1 md:pe-4 md:py-4 max-md:px-4">
+          <Header />
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

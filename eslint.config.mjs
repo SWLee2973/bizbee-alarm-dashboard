@@ -1,11 +1,10 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
 import { FlatCompat } from "@eslint/eslintrc";
-import stylisticJs from "@stylistic/eslint-plugin";
 import eslint from "@eslint/js";
-import tseslint from "typescript-eslint";
+import stylisticJs from "@stylistic/eslint-plugin";
 import reactHooks from "eslint-plugin-react-hooks";
-import eslintPluginTailwindCSS from "eslint-plugin-tailwindcss";
+import { dirname } from "path";
+import tseslint from "typescript-eslint";
+import { fileURLToPath } from "url";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,14 +32,7 @@ export default tseslint.config(
     arrowParens: true,
     indent: 2,
     semi: true,
-    commaDangle: "always-multiline",
   }),
-  {
-    plugins: {
-      "tailwindcss": eslintPluginTailwindCSS,
-    },
-    rules: eslintPluginTailwindCSS.configs.recommended.rules,
-  },
   {
     plugins: {
       "react-hooks": reactHooks,
@@ -63,8 +55,7 @@ export default tseslint.config(
       ],
       "@stylistic/jsx-quotes": ["error"],
       "@stylistic/semi": ["error"],
-      "@stylistic/max-len": ["error", { code: 80, tabWidth: 2 }],
-      "@stylistic/comma-dangle": ["error", "always-multiline"],
+      "@stylistic/comma-dangle": ["none"],
       "@stylistic/keyword-spacing": ["error"],
       "@stylistic/space-before-blocks": ["error"],
       "@stylistic/space-infix-ops": ["error"],
@@ -78,6 +69,20 @@ export default tseslint.config(
           singleline: {
             delimiter: "comma",
             requireLast: false,
+          },
+          overrides: {
+            interface: {
+              multiline: {
+                delimiter: "semi",
+                requireLast: true,
+              },
+            },
+            typeLiteral: {
+              multiline: {
+                delimiter: "semi",
+                requireLast: true,
+              },
+            },
           },
         },
       ],

@@ -1,26 +1,26 @@
 "use client";
 
-import React, { useEffect } from "react";
-import { themeChange } from "theme-change";
 import { theme } from "@/constants";
+import { themeStore } from "@/store";
+import { useEffect } from "react";
+import { themeChange } from "theme-change";
 
 function ThemeChanger() {
-  const onChangeTheme = (value: (typeof theme)[number]) => {
-    localStorage.setItem("theme", value);
-  };
+  const themeName = themeStore((state) => state.themeName);
+  const setThemeName = themeStore((state) => state.setThemeName);
 
   useEffect(() => {
     themeChange(false);
   }, []);
 
   return (
-    <div className="dropdown mb-72">
+    <div className="dropdown">
       <button
         tabIndex={0}
         role="button"
-        className="btn m-1 font-[Noto_Sans_KR]"
+        className="btn w-36 md:bg-accent font-[Noto_Sans_KR] rounded-lg flex items-center justify-between"
       >
-        테마
+        {themeName?.toUpperCase() ?? "DEFAULT"}
         <svg
           width="12px"
           height="12px"
@@ -33,7 +33,7 @@ function ThemeChanger() {
       </button>
       <ul
         tabIndex={0}
-        className="dropdown-content bg-base-300 rounded-box z-1 w-52 p-2 shadow-2xl"
+        className="dropdown-content bg-base-300 rounded-box z-1 w-36 p-2 shadow-2xl"
       >
         {theme.map((theme, index) => (
           <li key={index}>
@@ -43,7 +43,9 @@ function ThemeChanger() {
               className="theme-controller btn btn-sm btn-block btn-ghost justify-start"
               aria-label={theme.toUpperCase()}
               value={theme}
-              onChange={() => onChangeTheme(theme)}
+              onChange={() => {
+                setThemeName(theme);
+              }}
             />
           </li>
         ))}
