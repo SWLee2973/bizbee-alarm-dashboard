@@ -1,44 +1,14 @@
 import NextAuth, { NextAuthConfig, User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
+import { redirect } from "next/navigation";
 import { z } from "zod";
-
-const authConfig = {
-  session: {
-    strategy: "jwt",
-    maxAge: 60 * 60 * 24 * 7,
-  },
-  pages: {
-    signIn: "/login",
-  },
-  callbacks: {
-    authorized: ({ auth, request: { nextUrl } }) => {
-      const isLoggedIn = !!auth?.user;
-      console.log("nextUrl : ", nextUrl);
-
-      return true;
-    },
-    signIn: async () => {
-      console.log("1111 : ", 1111);
-      return true;
-    },
-    jwt: async ({ token, user }) => {
-      if (user?.token) {
-        token.accessToken = user.token;
-      }
-
-      return token;
-    },
-    session: async ({ session, token }) => {
-      return session;
-    },
-  },
-  providers: [],
-} satisfies NextAuthConfig;
+import { authConfig } from "./auth.config";
 
 const login = async (params: {
   userId: string;
   password: string;
 }): Promise<User> => {
+  console.log("params : ", params);
   return {
     username: "admin",
     role: "ADMIN",

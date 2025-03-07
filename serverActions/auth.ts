@@ -1,7 +1,8 @@
 "use server";
 
-import { auth, signIn, signOut, update } from "@/utils/auth";
+import { auth, signIn, signOut, update } from "@/auth/auth";
 import { AuthError } from "next-auth";
+import { redirect } from "next/navigation";
 
 export const signInWithCredentials = async (
   prevState: string | undefined,
