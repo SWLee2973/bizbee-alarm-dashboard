@@ -1,4 +1,6 @@
-import NextAuth, { NextAuthConfig } from "next-auth";
+import NextAuth, { NextAuthConfig, User } from "next-auth";
+import Credentials from "next-auth/providers/credentials";
+import { z } from "zod";
 
 const authConfig = {
   session: {
@@ -9,10 +11,21 @@ const authConfig = {
     signIn: "/login",
   },
   callbacks: {
+    authorized: ({ auth, request: { nextUrl } }) => {
+      const isLoggedIn = !!auth?.user;
+      console.log("nextUrl : ", nextUrl);
+
+      return true;
+    },
     signIn: async () => {
+      console.log("1111 : ", 1111);
       return true;
     },
     jwt: async ({ token, user }) => {
+      if (user?.token) {
+        token.accessToken = user.token;
+      }
+
       return token;
     },
     session: async ({ session, token }) => {
@@ -22,6 +35,18 @@ const authConfig = {
   providers: [],
 } satisfies NextAuthConfig;
 
+const login = async (params: {
+  userId: string;
+  password: string;
+}): Promise<User> => {
+  return {
+    username: "admin",
+    role: "ADMIN",
+    token:
+      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM",
+  };
+};
+
 export const {
   handlers,
   signIn,
@@ -30,5 +55,26 @@ export const {
   unstable_update: update,
 } = NextAuth({
   ...authConfig,
-  providers: [],
+  providers: [
+    Credentials({
+      authorize: async (credentials): Promise<User | null> => {
+        const parsedCredentials = z
+          .object({
+            userId: z.string(),
+            password: z.string().min(4),
+          })
+          .safeParse(credentials);
+
+        if (parsedCredentials.success) {
+          const params = parsedCredentials.data;
+          const user = await login(params);
+
+          return user;
+        }
+
+        console.log("로그인 실패");
+        return null;
+      },
+    }),
+  ],
 });

@@ -20,9 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className={`${notoSans.variable} antialiased md:flex`}>
+      <body className={`${notoSans.variable} antialiased md:flex min-h-screen`}>
         <NavBar />
-        <div className="flex-1 md:pe-4 md:py-4 max-md:px-4">
+        <div className="flex flex-1 md:pe-4 md:py-4 max-md:min-h-[calc(100svh-96px)] max-md:px-4 flex-col">
           <Header />
           {children}
         </div>
