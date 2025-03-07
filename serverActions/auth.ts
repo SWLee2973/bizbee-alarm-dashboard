@@ -2,7 +2,6 @@
 
 import { auth, signIn, signOut, update } from "@/auth/auth";
 import { AuthError } from "next-auth";
-import { redirect } from "next/navigation";
 
 export const signInWithCredentials = async (
   prevState: string | undefined,
@@ -27,4 +26,12 @@ export const signInWithCredentials = async (
   }
 };
 
-export { auth as getSession, update as updateSession, signOut };
+export const signOutWithForm = async (
+  prevState: void | undefined,
+  formData: FormData
+) => {
+  console.log("123 : ", 123);
+  await signOut();
+};
+
+export { auth as getSession, signOut, update as updateSession };

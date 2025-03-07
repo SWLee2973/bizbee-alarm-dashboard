@@ -1,5 +1,6 @@
 import ThemeChanger from "@/components/atom/ThemeChanger";
 import NavLinks from "../atom/NavLinks";
+import UserDropdown from "../login/UserDropdown";
 
 function NavBar() {
   return (
@@ -8,8 +9,9 @@ function NavBar() {
         <section className="flex-1">
           <NavLinks />
         </section>
-        <div className="md:hidden">
+        <div className="flex items-center gap-x-4 flex-row md:hidden w-fit pe-2">
           <ThemeChanger />
+          <UserDropdown />
         </div>
       </nav>
     </div>
