@@ -4,7 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
+    "dev:app": "pnpm build:electron && pnpm dev:electron",
+    "dev:electron": "electron dist/main.mjs",
     "build": "next build",
+    "build:electron": "vite build -c vite.config.electron.ts",
+    "vite": "vite",
     "start": "next start",
     "lint": "next lint"
   },
@@ -29,11 +33,13 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "daisyui": "^5.0.0",
+    "electron": "^35.0.1",
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
     "eslint-plugin-react-hooks": "^5.2.0",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "typescript-eslint": "^8.26.0"
+    "typescript-eslint": "^8.26.0",
+    "vite": "^6.2.1"
   }
 }
