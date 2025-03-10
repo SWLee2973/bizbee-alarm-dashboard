@@ -1,7 +1,10 @@
 import UserIcon from "@/public/svg/user.svg";
-import { signOut } from "@/serverActions/auth";
+import { getSession, signOut, signOutWithForm } from "@/serverActions/auth";
+import Link from "next/link";
 
-function UserDropdown() {
+async function UserDropdown() {
+  const session = await getSession();
+
   return (
     <div className="dropdown dropdown-end">
       <div
@@ -17,14 +20,18 @@ function UserDropdown() {
         className="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 mt-3 shadow-sm"
       >
         <li>
-          <button
-            onClick={async () => {
-              "use server";
-              await signOut();
-            }}
-          >
-            로그아웃
-          </button>
+          {session?.user ? (
+            <button
+              onClick={async () => {
+                "use server";
+                await signOut();
+              }}
+            >
+              로그아웃
+            </button>
+          ) : (
+            <Link href="/login">로그인</Link>
+          )}
         </li>
         <li>
           <a>Item 2</a>

@@ -1,39 +1,27 @@
-import NextAuth from "next-auth";
-import { authConfig } from "./auth/auth.config";
+import { getSession } from "@/serverActions/auth";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import { match } from "path-to-regexp";
 
-// import { getSession } from "@/serverActions/auth";
-// import { NextResponse } from "next/server";
-// import type { NextRequest } from "next/server";
-// import { match } from "path-to-regexp";
+const matchersForAuth = ["/dashboard"];
+const matchersForLogIn = ["/login/"];
+export async function middleware(request: NextRequest) {
+  // 해당 경로에서 로그인되어있지 않으면 로그인 창으로 이동
+  if (isMatch(request.nextUrl.pathname, matchersForAuth)) {
+    return (await getSession())
+      ? NextResponse.next()
+      : NextResponse.redirect(new URL("/login", request.url));
+  }
 
-// const matchersForAuth = ["/*", "/dashboard/*"];
-// const matchersForLogIn = ["/login/*"];
-// export async function middleware(request: NextRequest) {
-//   if (isMatch(request.nextUrl.pathname, matchersForAuth)) {
-//     console.log("11 : ", 11);
-//     return (await getSession())
-//       ? NextResponse.next()
-//       : NextResponse.redirect(new URL("/login", request.url));
-//   }
+  if (isMatch(request.nextUrl.pathname, matchersForLogIn)) {
+    return (await getSession())
+      ? NextResponse.redirect(new URL("/", request.url))
+      : NextResponse.next();
+  }
 
-//   if (isMatch(request.nextUrl.pathname, matchersForLogIn)) {
-//     console.log("22 : ", 22);
-//     return (await getSession())
-//       ? NextResponse.redirect(new URL("/", request.url))
-//       : NextResponse.next();
-//   }
-//   console.log("22 : ", 22);
-//   return NextResponse.next();
-// }
+  return NextResponse.next();
+}
 
-// function isMatch(pathname: string, urls: string[]) {
-//   console.log("pathname : ", pathname);
-//   console.log("urls : ", urls);
-//   return urls.some((url) => !!match(url)(pathname));
-// }
-
-export default NextAuth(authConfig).auth;
-
-export const config = {
-  matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
-};
+function isMatch(pathname: string, urls: string[]) {
+  return urls.some((url) => !!match(url)(pathname));
+}

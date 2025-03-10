@@ -1,6 +1,5 @@
-import NextAuth, { NextAuthConfig, User } from "next-auth";
+import NextAuth, { User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
-import { redirect } from "next/navigation";
 import { z } from "zod";
 import { authConfig } from "./auth.config";
 

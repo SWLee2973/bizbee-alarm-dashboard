@@ -6,12 +6,15 @@ import KeyIcon from "@/public/svg/key.svg";
 import { signInWithCredentials } from "@/serverActions/auth";
 
 function LoginForm() {
-  const [errorMessage, formAction, isPending] = useActionState(
-    signInWithCredentials,
-    undefined
-  );
+  // const [errorMessage, formAction, isPending] = useActionState(
+  //   signInWithCredentials,
+  //   undefined
+  // );
   return (
-    <form action={formAction} className="card card-border border-base-300 w-md">
+    <form
+      action={signInWithCredentials}
+      className="card card-border border-base-300 w-md"
+    >
       <div className="border-b border-base-300 border-dashed p-4 flex items-center justify-center">
         <h2 className="card-title">로그인</h2>
       </div>
