@@ -9,7 +9,7 @@ function NavLinks() {
   const pathname = usePathname();
 
   return (
-    <ul className="menu md:w-full md:menu-vertical max-md:menu-horizontal bg-base-200 rounded-lg">
+    <ul className="menu md:w-full md:menu-vertical max-md:menu-horizontal rounded-lg">
       {links.map((link) => {
         const className = clsx("md:w-full md:h-10 rounded-lg", {
           "bg-primary": pathname === link.href,

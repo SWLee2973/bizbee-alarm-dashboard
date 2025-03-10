@@ -24,6 +24,8 @@ export const signInWithCredentials = async (data: FormData) => {
 };
 
 export const signOutWithForm = async () => {
+  // console.log("data : ", data);
+  console.log("11 : ", 11);
   await signOut();
 };
 

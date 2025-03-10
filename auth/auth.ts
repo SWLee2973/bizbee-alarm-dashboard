@@ -7,9 +7,9 @@ const login = async (params: {
   userId: string;
   password: string;
 }): Promise<User> => {
-  console.log("params : ", params);
   return {
-    username: "admin",
+    userId: "admin",
+    name: "admin",
     role: "ADMIN",
     token:
       "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM",
