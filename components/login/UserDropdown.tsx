@@ -3,11 +3,15 @@
 import { useSession } from "@/provider/session";
 import UserIcon from "@/public/svg/user.svg";
 import { signOutWithForm } from "@/serverActions/auth";
+import { Session } from "next-auth";
 import Link from "next/link";
 import { useActionState } from "react";
 
-function UserDropdown() {
-  const session = useSession();
+interface IUserDropdownProps {
+  user: Session["user"] | undefined;
+}
+
+function UserDropdown({ user }: IUserDropdownProps) {
   const [_, action] = useActionState(signOutWithForm, undefined);
 
   return (
@@ -25,8 +29,13 @@ function UserDropdown() {
       >
         <form action={action}>
           <li>
-            {session?.user ? (
-              <button>로그아웃</button>
+            {user ? (
+              <div className="flex flex-col items-center gap-2">
+                <div>
+                  <p>{user.name}</p>
+                </div>
+                <button>로그아웃</button>
+              </div>
             ) : (
               <Link href="/login?callbackUrl=/">로그인</Link>
             )}

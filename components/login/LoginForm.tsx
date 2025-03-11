@@ -20,6 +20,16 @@ function LoginForm() {
           <UserIcon className="h-1/2 aspect-square" />
           <input
             required
+            name="corpCd"
+            type="text"
+            className="grow"
+            placeholder="회사 코드"
+          />
+        </label>
+        <label className="input input-border flex items-center gap-2 w-full">
+          <UserIcon className="h-1/2 aspect-square" />
+          <input
+            required
             name="userId"
             type="text"
             className="grow"

@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "concurrently \"pnpm dev:next\" \"pnpm dev:app\" \"pnpm json-server --watch constants/db.json --port 3001\"",
+    "dev:next": "next dev --turbopack",
     "dev:app": "pnpm build:electron && pnpm dev:electron",
     "dev:electron": "electron dist/main.mjs",
     "build": "next build",
@@ -15,6 +16,7 @@
   "dependencies": {
     "@svgr/webpack": "^8.1.0",
     "clsx": "^2.1.1",
+    "concurrently": "^9.1.2",
     "lodash": "^4.17.21",
     "next": "15.2.1",
     "next-auth": "5.0.0-beta.25",
@@ -37,6 +39,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
     "eslint-plugin-react-hooks": "^5.2.0",
+    "json-server": "1.0.0-beta.3",
     "tailwindcss": "^4",
     "typescript": "^5",
     "typescript-eslint": "^8.26.0",

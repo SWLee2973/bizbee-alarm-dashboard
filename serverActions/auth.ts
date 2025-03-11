@@ -9,6 +9,7 @@ export const signInWithCredentials = async (
 ) => {
   try {
     await signIn("credentials", {
+      corpCd: data.get("corpCd"),
       userId: data.get("userId"),
       password: data.get("password"),
     });
@@ -27,8 +28,6 @@ export const signInWithCredentials = async (
 };
 
 export const signOutWithForm = async () => {
-  // console.log("data : ", data);
-  console.log("11 : ", 11);
   await signOut();
 };
 

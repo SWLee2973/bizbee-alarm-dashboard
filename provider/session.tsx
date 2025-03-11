@@ -16,7 +16,9 @@ function SessionProvider({ children }: ISessionProviderProps) {
   const [session, setSession] = useState<Session | null>(null);
 
   useEffect(() => {
-    getSession().then((res) => setSession(res));
+    getSession().then((res) => {
+      setSession(res);
+    });
   }, [pathname]);
 
   return (

@@ -4,16 +4,17 @@ import { z } from "zod";
 import { authConfig } from "./auth.config";
 
 const login = async (params: {
+  corpCd: string;
   userId: string;
   password: string;
 }): Promise<User> => {
-  return {
-    userId: "admin",
-    name: "admin",
-    role: "ADMIN",
-    token:
-      "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM",
-  };
+  const res = await fetch(
+    `http://localhost:3001/users/?userId=${params.userId}&password=${params.password}`
+  );
+
+  const user = await res.json();
+
+  return user[0];
 };
 
 export const {
@@ -27,12 +28,17 @@ export const {
   providers: [
     Credentials({
       authorize: async (credentials): Promise<User | null> => {
+        console.log("credentials : ", credentials);
+
         const parsedCredentials = z
           .object({
+            corpCd: z.string(),
             userId: z.string(),
             password: z.string().min(4),
           })
           .safeParse(credentials);
+
+        console.log("parsedCredentials : ", parsedCredentials);
 
         if (parsedCredentials.success) {
           const params = parsedCredentials.data;
