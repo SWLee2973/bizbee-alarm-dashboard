@@ -4,6 +4,8 @@ import "@/globals.css";
 import NavBar from "@/components/ui/NavBar";
 import Header from "@/components/ui/Header";
 import SessionProvider from "@/provider/session";
+import { QueryProvider } from "@/provider/query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const notoSans = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
   subsets: ["latin"],
@@ -22,13 +24,16 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${notoSans.variable} antialiased md:flex min-h-screen`}>
-        <SessionProvider>
-          <NavBar />
-          <div className="flex flex-1 md:pe-4 md:py-4 max-md:min-h-[calc(100svh-96px)] max-md:px-4 flex-col">
-            <Header />
-            {children}
-          </div>
-        </SessionProvider>
+        <QueryProvider>
+          <SessionProvider>
+            <NavBar />
+            <div className="flex flex-1 md:pe-4 md:py-4 max-md:min-h-[calc(100svh-96px)] max-md:px-4 flex-col">
+              <Header />
+              {children}
+            </div>
+          </SessionProvider>
+          <ReactQueryDevtools />
+        </QueryProvider>
       </body>
     </html>
   );
