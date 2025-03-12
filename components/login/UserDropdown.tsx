@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "@/provider/session";
 import UserIcon from "@/public/svg/user.svg";
 import { signOutWithForm } from "@/serverActions/auth";
 import { Session } from "next-auth";
@@ -25,25 +24,27 @@ function UserDropdown({ user }: IUserDropdownProps) {
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 mt-3 shadow-sm"
+        className="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 mt-3 shadow-sm &>li:items-center"
       >
-        <form action={action}>
-          <li>
+        <li className="w-full">
+          <form action={action} className="flex items-center w-full">
             {user ? (
-              <div className="flex flex-col items-center gap-2">
-                <div>
-                  <p>{user.name}</p>
-                </div>
-                <button>로그아웃</button>
-              </div>
+              <button type="submit" className="size-full cursor-pointer">
+                로그아웃
+              </button>
             ) : (
-              <Link href="/login?callbackUrl=/">로그인</Link>
+              <Link
+                href="/login?callbackUrl=/"
+                className="size-full text-center"
+              >
+                로그인
+              </Link>
             )}
-          </li>
-          <li>
-            <a>Item 2</a>
-          </li>
-        </form>
+          </form>
+        </li>
+        <li>
+          <a>Item 2</a>
+        </li>
       </ul>
     </div>
   );

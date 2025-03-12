@@ -28,8 +28,6 @@ export const {
   providers: [
     Credentials({
       authorize: async (credentials): Promise<User | null> => {
-        console.log("credentials : ", credentials);
-
         const parsedCredentials = z
           .object({
             corpCd: z.string(),
@@ -38,8 +36,6 @@ export const {
           })
           .safeParse(credentials);
 
-        console.log("parsedCredentials : ", parsedCredentials);
-
         if (parsedCredentials.success) {
           const params = parsedCredentials.data;
           const user = await login(params);
@@ -47,7 +43,6 @@ export const {
           return user;
         }
 
-        console.log("로그인 실패");
         return null;
       },
     }),
