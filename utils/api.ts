@@ -1,19 +1,11 @@
 import { getSession } from "@/serverActions/auth";
-import { IResponseError, IResponseWithData } from "@/types/api-type";
+import { IResponseError } from "@/types/api-type";
 
-type Params<T = unknown> = {
-  [K in keyof T]?: string | number | boolean | null | undefined;
-};
-
-type TOptions<TBody = unknown, TParams = unknown> = Omit<
-  RequestInit,
-  "headers" | "body"
-> & {
+type TOptions<TBody = unknown> = Omit<RequestInit, "headers" | "body"> & {
   headers?: Record<string, string>;
   body?: TBody;
   needAuth?: boolean;
   contentType?: string;
-  params?: Params<TParams>;
 };
 
 class Fetch {
@@ -23,31 +15,27 @@ class Fetch {
     this.baseUrl = baseUrl;
   }
 
-  private async request<TResponse, TBody = unknown>(
-    url: string,
-    options: TOptions<TBody>
-  ): Promise<IResponseWithData<TResponse>>;
   private async request<TBody = unknown>(
     url: string,
     options: TOptions<TBody>
-  ): Promise<IResponseWithData<undefined> | null>;
-
+  ): Promise<undefined | null>;
+  private async request<TResponse, TBody = unknown>(
+    url: string,
+    options: TOptions<TBody>
+  ): Promise<TResponse>;
   private async request<TResponse = undefined, TBody = unknown>(
     url: string,
     options: TOptions<TBody>
-  ): Promise<IResponseWithData<TResponse> | null> {
+  ): Promise<TResponse | null> {
     const {
       needAuth = false,
       contentType = "application/json",
       headers,
       body,
-      params,
       ...rest
     } = options;
 
     const session = await getSession();
-    // console.log("session : ", session);
-    // console.log("baseUrl : ", this.baseUrl);
     const _headers = new Headers(
       Object.assign(
         {
@@ -58,16 +46,7 @@ class Fetch {
       )
     );
 
-    const fetchUrl = `${this.baseUrl}${url}${
-      params
-        ? "?" +
-          new URLSearchParams(
-            Object.entries(params)
-              .filter(([_, value]) => value != null)
-              .map(([key, value]) => [key, String(value)])
-          ).toString()
-        : ""
-    }`;
+    const fetchUrl = this.baseUrl + url;
 
     const response = await fetch(fetchUrl, {
       ...rest,
@@ -81,7 +60,7 @@ class Fetch {
       throw data as IResponseError;
     }
 
-    return data as IResponseWithData<TResponse>;
+    return data as TResponse;
   }
 
   public get<TResponse>(url: string, options?: TOptions) {
@@ -105,6 +84,6 @@ class Fetch {
   }
 }
 
-const api = new Fetch(process.env.API_URL || "");
+const api = new Fetch(process.env.NEXT_PUBLIC_API_URL || "");
 
 export default api;

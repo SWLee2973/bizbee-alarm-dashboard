@@ -19,7 +19,7 @@
       "id": "71ce"
     }
   ],
-  "projects": [
+  "apps": [
     {
       "id": "p001",
       "name": "bizbee-wms"
@@ -33,49 +33,49 @@
       "name": "bizbee-service"
     },
     {
-      "id": "p003",
+      "id": "p004",
       "name": "bizbee-service"
     },
     {
-      "id": "p004",
+      "id": "p005",
       "name": "fir-bombom"
     },
     {
-      "id": "p005",
+      "id": "p006",
       "name": "bizbee-foms"
     }
   ],
   "requests": [
     {
-      "projectId": "p001",
+      "appId": "p001",
       "totalRequests": 8,
       "totalSuccess": 4,
       "totalFailures": 4,
       "id": "b7f1"
     },
     {
-      "projectId": "p002",
+      "appId": "p002",
       "totalRequests": 28,
       "totalSuccess": 9,
       "totalFailures": 19,
       "id": "13b9"
     },
     {
-      "projectId": "p003",
+      "appId": "p003",
       "totalRequests": 56,
       "totalSuccess": 8,
       "totalFailures": 48,
       "id": "e908"
     },
     {
-      "projectId": "p004",
+      "appId": "p004",
       "totalRequests": 20,
       "totalSuccess": 1,
       "totalFailures": 19,
       "id": "d4a3"
     },
     {
-      "projectId": "p005",
+      "appId": "p005",
       "totalRequests": 6,
       "totalSuccess": 0,
       "totalFailures": 6,
