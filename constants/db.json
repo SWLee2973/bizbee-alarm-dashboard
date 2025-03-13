@@ -6,7 +6,8 @@
       "name": "admin",
       "role": "SUPER_ADMIN",
       "password": "1111",
-      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM"
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM",
+      "id": "cb35"
     },
     {
       "corpCd": "NAURI",
@@ -14,7 +15,8 @@
       "name": "테스터",
       "role": "ADMIN",
       "password": "test",
-      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM"
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM",
+      "id": "71ce"
     }
   ],
   "projects": [
@@ -48,31 +50,36 @@
       "projectId": "p001",
       "totalRequests": 8,
       "totalSuccess": 4,
-      "totalFailures": 4
+      "totalFailures": 4,
+      "id": "b7f1"
     },
     {
       "projectId": "p002",
       "totalRequests": 28,
       "totalSuccess": 9,
-      "totalFailures": 19
+      "totalFailures": 19,
+      "id": "13b9"
     },
     {
       "projectId": "p003",
       "totalRequests": 56,
       "totalSuccess": 8,
-      "totalFailures": 48
+      "totalFailures": 48,
+      "id": "e908"
     },
     {
       "projectId": "p004",
       "totalRequests": 20,
       "totalSuccess": 1,
-      "totalFailures": 19
+      "totalFailures": 19,
+      "id": "d4a3"
     },
     {
       "projectId": "p005",
       "totalRequests": 6,
       "totalSuccess": 0,
-      "totalFailures": 6
+      "totalFailures": 6,
+      "id": "8c40"
     }
   ]
 }

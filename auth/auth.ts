@@ -1,21 +1,8 @@
+import { login } from "@/utils";
 import NextAuth, { User } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { z } from "zod";
 import { authConfig } from "./auth.config";
-
-const login = async (params: {
-  corpCd: string;
-  userId: string;
-  password: string;
-}): Promise<User> => {
-  const res = await fetch(
-    `http://localhost:3001/users/?userId=${params.userId}&password=${params.password}`
-  );
-
-  const user = await res.json();
-
-  return user[0];
-};
 
 export const {
   handlers,

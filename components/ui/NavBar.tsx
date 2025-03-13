@@ -11,6 +11,7 @@ function NavBar() {
   return (
     <div className="md:h-screen md:w-60 max-md:h-24 max-md:w-full p-4">
       <nav className="bg-base-300 size-full rounded-lg p-2 max-md:items-center max-md:flex">
+        <h1 className="sr-only">네비게이션 바</h1>
         <section className="flex-1">
           <NavLinks />
         </section>

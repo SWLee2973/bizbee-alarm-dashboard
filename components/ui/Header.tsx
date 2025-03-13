@@ -9,7 +9,7 @@ function Header() {
   const session = useSession();
 
   return (
-    <header className="flex gap-x-4 justify-end max-md:hidden">
+    <header className="flex gap-x-4 mb-3 justify-end max-md:hidden">
       <ThemeChanger />
       <UserDropdown user={session?.user} />
     </header>
