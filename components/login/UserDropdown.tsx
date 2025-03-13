@@ -18,9 +18,10 @@ function UserDropdown({ user }: IUserDropdownProps) {
       <div
         tabIndex={0}
         role="button"
-        className="btn size-10 rounded-full bg-base-200 md:bg-base-300 p-1"
+        className="btn rounded-full bg-base-200 md:bg-base-300 p-1"
       >
         <UserIcon className="size-full p-1" />
+        {user && <span className="pe-2 mb-0.5 text-nowrap">{user.name}</span>}
       </div>
       <ul
         tabIndex={0}
