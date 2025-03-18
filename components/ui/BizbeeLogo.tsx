@@ -3,7 +3,7 @@ import { Logo } from "../svgIcons";
 
 function BizbeeLogo() {
   return (
-    <div className="fit-content flex items-center gap-x-3 md:px-4 max-md:px-2 max-md:py-1 md:my-4">
+    <div className="fit-content flex max-[512px]:hidden items-center gap-x-3 md:px-4 max-md:px-2 max-md:py-1 md:my-4">
       <Logo width="44px" height="44px" />
       <h1 className="flex flex-col">
         <strong className="md:text-xl max-md:text-md font-bold">Bizbee</strong>

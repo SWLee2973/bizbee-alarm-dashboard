@@ -1,4 +1,4 @@
-const dashboardData = {
+export const sendCountData = {
   totalRequests: 118,
   totalSuccess: 22,
   totalFailures: 96,
@@ -38,9 +38,3 @@ const dashboardData = {
     },
   ],
 };
-
-const data = {
-  dashboard: dashboardData,
-};
-
-export default data;

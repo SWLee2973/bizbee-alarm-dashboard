@@ -27,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang="ko" className={pretendard.variable}>
       <body
-        className={`${pretendard.className} antialiased md:flex min-h-screen`}
+        className={`${pretendard.className} antialiased md:flex min-h-screen min-w-[360px]`}
       >
         <QueryProvider>
           <SessionProvider>

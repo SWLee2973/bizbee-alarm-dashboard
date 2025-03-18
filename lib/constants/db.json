@@ -47,35 +47,35 @@
   ],
   "requests": [
     {
-      "appId": "p001",
+      "projectId": "p001",
       "totalRequests": 8,
       "totalSuccess": 4,
       "totalFailures": 4,
       "id": "b7f1"
     },
     {
-      "appId": "p002",
+      "projectId": "p002",
       "totalRequests": 28,
       "totalSuccess": 9,
       "totalFailures": 19,
       "id": "13b9"
     },
     {
-      "appId": "p003",
+      "projectId": "p003",
       "totalRequests": 56,
       "totalSuccess": 8,
       "totalFailures": 48,
       "id": "e908"
     },
     {
-      "appId": "p004",
+      "projectId": "p004",
       "totalRequests": 20,
       "totalSuccess": 1,
       "totalFailures": 19,
       "id": "d4a3"
     },
     {
-      "appId": "p005",
+      "projectId": "p005",
       "totalRequests": 6,
       "totalSuccess": 0,
       "totalFailures": 6,
