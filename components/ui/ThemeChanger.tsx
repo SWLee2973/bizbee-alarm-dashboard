@@ -17,7 +17,7 @@ function ThemeChanger() {
       <button
         tabIndex={0}
         role="button"
-        className="btn w-36 md:bg-base-300 font-[Noto_Sans_KR] rounded-lg flex items-center justify-between"
+        className="btn w-36 md:bg-base-300 font-[Noto_Sans_KR] rounded-md flex items-center justify-between"
       >
         {themeName?.toUpperCase() ?? "DEFAULT"}
         <svg
@@ -32,14 +32,14 @@ function ThemeChanger() {
       </button>
       <ul
         tabIndex={0}
-        className="dropdown-content rounded-lg bg-base-300 rounded-box z-1 w-36 p-2 shadow-2xl"
+        className="dropdown-content rounded-md bg-base-300 z-1 w-36 p-2 md:mt-3 max-md:mt-5 shadow-2xl"
       >
         {theme.map((theme, index) => (
           <li key={index}>
             <input
               type="radio"
               name="theme-dropdown"
-              className="theme-controller btn btn-sm btn-block rounded-lg btn-ghost justify-start"
+              className="theme-controller btn btn-sm btn-block rounded-md btn-ghost justify-start"
               aria-label={theme.toUpperCase()}
               value={theme}
               onChange={() => {

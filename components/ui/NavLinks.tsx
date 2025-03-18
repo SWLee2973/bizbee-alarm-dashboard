@@ -9,9 +9,9 @@ function NavLinks() {
   const pathname = usePathname();
 
   return (
-    <ul className="menu md:w-full flex gap-3 md:menu-vertical max-md:menu-horizontal rounded-lg">
+    <ul className="menu md:w-full flex gap-3 md:menu-vertical max-md:menu-horizontal rounded-md">
       {links.map((link) => {
-        const className = clsx("md:w-full md:h-10 rounded-lg", {
+        const className = clsx("md:w-full md:h-10 rounded-md", {
           "bg-primary": pathname === link.href,
         });
 
@@ -19,7 +19,7 @@ function NavLinks() {
           <li key={link.name} className={className}>
             <Link
               href={link.href}
-              className="flex size-full rounded-lg justify-center items-center"
+              className="flex size-full rounded-md justify-center items-center"
             >
               <p
                 className={clsx("font-semibold", {

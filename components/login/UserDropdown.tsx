@@ -25,7 +25,7 @@ function UserDropdown({ user }: IUserDropdownProps) {
       </div>
       <ul
         tabIndex={0}
-        className="dropdown-content menu bg-base-300 rounded-box z-1 w-52 p-2 mt-3 shadow-sm &>li:items-center"
+        className="dropdown-content menu bg-base-300 rounded-md z-1 w-52 p-2 md:mt-3 max-md:-me-3 max-md:mt-5 shadow-sm &>li:items-center"
       >
         <li className="w-full">
           <form action={action} className="flex items-center w-full">
