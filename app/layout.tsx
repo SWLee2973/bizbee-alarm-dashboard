@@ -1,14 +1,17 @@
 import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
+import localFont from "next/font/local";
 import "@/globals.css";
 import NavBar from "@/components/ui/NavBar";
 import Header from "@/components/ui/Header";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { QueryProvider } from "@/components/provider/query";
 import SessionProvider from "@/components/provider/session";
-const notoSans = Noto_Sans_KR({
-  variable: "--font-noto-sans-kr",
-  subsets: ["latin"],
+
+const pretendard = localFont({
+  src: "../public/fonts/PretendardVariable.woff2",
+  display: "swap",
+  weight: "45 920",
+  variable: "--font-pretendard",
 });
 
 export const metadata: Metadata = {
@@ -22,8 +25,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko">
-      <body className={`${notoSans.variable} antialiased md:flex min-h-screen`}>
+    <html lang="ko" className={pretendard.variable}>
+      <body
+        className={`${pretendard.className} antialiased md:flex min-h-screen`}
+      >
         <QueryProvider>
           <SessionProvider>
             <NavBar />
