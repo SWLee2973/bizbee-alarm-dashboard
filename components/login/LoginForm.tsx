@@ -3,8 +3,8 @@
 import React, { useActionState } from "react";
 import UserIcon from "@/public/svg/user.svg";
 import KeyIcon from "@/public/svg/key.svg";
-import { signInWithCredentials } from "@/serverActions/auth";
 import { Logo } from "../svgIcons";
+import { signInWithCredentials } from "@/lib";
 
 function LoginForm() {
   const [errorMessage, formAction, isPending] = useActionState(

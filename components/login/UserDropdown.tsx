@@ -1,7 +1,7 @@
 "use client";
 
+import { signOutWithForm } from "@/lib";
 import UserIcon from "@/public/svg/user.svg";
-import { signOutWithForm } from "@/serverActions/auth";
 import { Session } from "next-auth";
 import Link from "next/link";
 import { useActionState } from "react";

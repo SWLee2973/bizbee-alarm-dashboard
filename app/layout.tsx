@@ -3,9 +3,9 @@ import { Noto_Sans_KR } from "next/font/google";
 import "@/globals.css";
 import NavBar from "@/components/ui/NavBar";
 import Header from "@/components/ui/Header";
-import SessionProvider from "@/provider/session";
-import { QueryProvider } from "@/provider/query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import { QueryProvider } from "@/components/provider/query";
+import SessionProvider from "@/components/provider/session";
 const notoSans = Noto_Sans_KR({
   variable: "--font-noto-sans-kr",
   subsets: ["latin"],

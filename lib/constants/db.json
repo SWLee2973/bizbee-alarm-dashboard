@@ -1,0 +1,85 @@
+{
+  "users": [
+    {
+      "corpCd": "NAURI",
+      "userId": "admin",
+      "name": "admin",
+      "role": "SUPER_ADMIN",
+      "password": "1111",
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM",
+      "id": "cb35"
+    },
+    {
+      "corpCd": "NAURI",
+      "userId": "test",
+      "name": "테스터",
+      "role": "ADMIN",
+      "password": "test",
+      "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsInJvbGUiOiJBRE1JTiIsImV4cCI6MTczOTQzNDc5MywiaWF0IjoxNzQxMTM3NzYwfQ.y5wr6xi3rYg9GwIFkFKgcMTITjvfsugPK_a0niNdnfM",
+      "id": "71ce"
+    }
+  ],
+  "projects": [
+    {
+      "id": "p001",
+      "name": "bizbee-wms"
+    },
+    {
+      "id": "p002",
+      "name": "bizbee-oms"
+    },
+    {
+      "id": "p003",
+      "name": "bizbee-service"
+    },
+    {
+      "id": "p004",
+      "name": "bizbee-service"
+    },
+    {
+      "id": "p005",
+      "name": "fir-bombom"
+    },
+    {
+      "id": "p006",
+      "name": "bizbee-foms"
+    }
+  ],
+  "requests": [
+    {
+      "appId": "p001",
+      "totalRequests": 8,
+      "totalSuccess": 4,
+      "totalFailures": 4,
+      "id": "b7f1"
+    },
+    {
+      "appId": "p002",
+      "totalRequests": 28,
+      "totalSuccess": 9,
+      "totalFailures": 19,
+      "id": "13b9"
+    },
+    {
+      "appId": "p003",
+      "totalRequests": 56,
+      "totalSuccess": 8,
+      "totalFailures": 48,
+      "id": "e908"
+    },
+    {
+      "appId": "p004",
+      "totalRequests": 20,
+      "totalSuccess": 1,
+      "totalFailures": 19,
+      "id": "d4a3"
+    },
+    {
+      "appId": "p005",
+      "totalRequests": 6,
+      "totalSuccess": 0,
+      "totalFailures": 6,
+      "id": "8c40"
+    }
+  ]
+}

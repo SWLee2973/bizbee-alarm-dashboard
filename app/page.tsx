@@ -1,10 +1,5 @@
-import Apps from "@/components/home/Apps";
+import { redirect } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div className="flex-1">
-      <h1 className="sr-only">홈</h1>
-      <Apps />
-    </div>
-  );
+  redirect("/dashboard");
 }

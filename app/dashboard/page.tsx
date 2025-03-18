@@ -1,7 +1,11 @@
-import React from "react";
+import ProjectsCard from "@/components/projects/ProjectsCard";
 
-function DashboardPage() {
-  return <div>dashboard</div>;
+async function DashboardPage() {
+  return (
+    <div className="flex-1">
+      <ProjectsCard />
+    </div>
+  );
 }
 
 export default DashboardPage;

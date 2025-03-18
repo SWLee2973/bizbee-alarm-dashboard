@@ -1,9 +1,9 @@
 "use client";
 
 import React from "react";
-import ThemeChanger from "../atom/ThemeChanger";
+import ThemeChanger from "./ThemeChanger";
 import UserDropdown from "../login/UserDropdown";
-import { useSession } from "@/provider/session";
+import { useSession } from "../provider/session";
 
 function Header() {
   const session = useSession();
