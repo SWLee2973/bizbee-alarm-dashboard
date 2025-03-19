@@ -1,21 +1,28 @@
 "use client";
 
 import { sendCountData } from "@/lib";
-import React from "react";
+import { redirect } from "next/navigation";
 import {
-  AreaChart,
-  Area,
+  CartesianGrid,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
   XAxis,
   YAxis,
-  CartesianGrid,
-  Tooltip,
-  ResponsiveContainer,
 } from "recharts";
+import { CategoricalChartState } from "recharts/types/chart/types";
 
 function SendCountChart() {
+  const moveProjectPage = (e: CategoricalChartState) => {
+    const projectName = e.activeLabel;
+
+    redirect(`/projects/${projectName}`);
+  };
+
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <AreaChart
+      <LineChart
         width={500}
         height={400}
         data={sendCountData.projectMetrics}
@@ -25,33 +32,22 @@ function SendCountChart() {
           left: 0,
           bottom: 0,
         }}
+        style={{ cursor: "pointer" }}
+        onClick={moveProjectPage}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="projectId" />
+        <XAxis dataKey="projectId" padding={{ left: 20, right: 20 }} />
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
-        <Area
+        <Line
           type="monotone"
           dataKey="totalRequests"
-          stackId="1"
           stroke="#8884d8"
-          fill="#8884d8"
+          activeDot={{ r: 8 }}
         />
-        <Area
-          type="monotone"
-          dataKey="totalSuccess"
-          stackId="1"
-          stroke="#82ca9d"
-          fill="#82ca9d"
-        />
-        <Area
-          type="monotone"
-          dataKey="totalFailures"
-          stackId="1"
-          stroke="#ffc658"
-          fill="#ffc658"
-        />
-      </AreaChart>
+        <Line type="monotone" dataKey="totalSuccess" stroke="#82ca9d" />
+        <Line type="monotone" dataKey="totalFailures" stroke="#ffc658" />
+      </LineChart>
     </ResponsiveContainer>
   );
 }
@@ -72,6 +68,10 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     );
   }
 
+  return null;
+};
+
+const CustomLegend = () => {
   return null;
 };
 
