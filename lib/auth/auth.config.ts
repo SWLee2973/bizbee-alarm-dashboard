@@ -30,13 +30,28 @@ export const authConfig = {
       return true;
     },
     jwt: async ({ token, user }) => {
-      if (user?.token) {
-        token.accessToken = user.token;
+      if (user) {
+        return {
+          ...token,
+          id: user.id,
+          corpCd: user.corpCd,
+          userId: user.userId,
+          role: user.role,
+          token: user.token,
+        };
       }
-
       return token;
     },
-    session: async ({ session, token }) => {
+    session: async ({ session, user, token }) => {
+      session.user = {
+        ...session.user,
+        id: token.id as string,
+        corpCd: token.corpCd as string,
+        userId: token.userId as string,
+        role: token.role as string,
+        token: token.token as string,
+      };
+
       return session;
     },
   },

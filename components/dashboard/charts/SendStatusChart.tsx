@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import { CategoricalChartState } from "recharts/types/chart/types";
 
-function SendCountChart() {
+function SendStatusChart() {
   const moveProjectPage = (e: CategoricalChartState) => {
     const projectName = e.activeLabel;
 
@@ -81,4 +81,4 @@ const dataKeyNames = {
   totalFailures: "발송 실패",
 } as const;
 
-export default SendCountChart;
+export default SendStatusChart;

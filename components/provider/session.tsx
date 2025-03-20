@@ -21,6 +21,14 @@ function SessionProvider({ children }: ISessionProviderProps) {
     });
   }, [pathname]);
 
+  // useEffect(() => {
+  //   (async () => {
+  //     const resp = await getSession();
+
+  //     console.log("resp : ", resp);
+  //   })();
+  // }, []);
+
   return (
     <SessionContext.Provider value={session}>
       {children}
