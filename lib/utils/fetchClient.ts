@@ -1,5 +1,6 @@
 import { IResponseError } from "@/types";
 import { getSession } from "../serverActions/auth";
+import { Session } from "next-auth";
 
 type TOptions<TBody = unknown> = Omit<RequestInit, "headers" | "body"> & {
   headers?: Record<string, string>;
@@ -7,6 +8,24 @@ type TOptions<TBody = unknown> = Omit<RequestInit, "headers" | "body"> & {
   needAuth?: boolean;
   contentType?: string;
 };
+
+async function getSessionInfo(): Promise<Session | null> {
+  if (typeof window === "undefined") {
+    return await getSession();
+  }
+
+  try {
+    const res = await fetch("/api/session");
+
+    if (!res.ok)
+      throw new Error("클라이언트에서 세션 정보를 가져오는데 실패했습니다.");
+
+    return await res.json();
+  } catch (error) {
+    console.log("error : ", error);
+    return null;
+  }
+}
 
 export class FetchClient {
   private baseUrl: string;
@@ -35,19 +54,12 @@ export class FetchClient {
       ...rest
     } = options;
 
-    const session = await getSession();
+    const session = await getSessionInfo();
     const _headers = new Headers(
       Object.assign(
         {
           "Content-Type": contentType,
         },
-        process.env.NODE_ENV === "development"
-          ? {
-              // credentials: "include",
-              // "Access-Control-Allow-Origin": "*",
-              "ngrok-skip-browser-warning": true,
-            }
-          : {},
         needAuth ? { Authorization: `Bearer ${session?.user.token}` } : {},
         headers
       )

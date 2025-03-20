@@ -1,12 +1,15 @@
-"use client";
-
-import { useProjects } from "@/lib";
+import { api, fetchProjects } from "@/lib";
 import Link from "next/link";
 import React from "react";
 
-function ProjectsCountCard() {
-  const { data } = useProjects();
+interface IProjectsListResponse {
+  project: string;
+}
 
+async function ProjectsCountCard() {
+  const data = await fetchProjects();
+  // const { data } = useProjects();
+  // const data = await api.get<IProjectsListResponse[]>("/dashboard/projects");
   return (
     <section className="card bg-base-200 h-fit card-md flex-1 shadow-sm rounded-md min-w-0">
       <div className="card-body flex flex-col justify-between">

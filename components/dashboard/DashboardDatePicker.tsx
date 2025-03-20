@@ -10,11 +10,15 @@ interface IDashboardDatePickerProps {
   onChange: (dateRange: DateRange) => void;
 }
 
-function DashboardDatePicker({
-  dateRange,
-  onChange,
-}: IDashboardDatePickerProps) {
-  const [date, setDate] = useState<DateRange>(dateRange);
+function DashboardDatePicker() {
+  const [searchDate, setSearchDate] = useState<DateRange>({
+    from: dayjs().subtract(1, "month").toDate(),
+    to: dayjs().toDate(),
+  });
+  const [date, setDate] = useState<DateRange>({
+    from: dayjs().subtract(1, "month").toDate(),
+    to: dayjs().toDate(),
+  });
 
   return (
     <div className="flex flex-1 items-center gap-x-2 justify-end">
@@ -26,8 +30,7 @@ function DashboardDatePicker({
           className="input input-border cursor-pointer bg-transparent w-fit"
           // style={{ anchorName: "--rdp" } as React.CSSProperties}
         >
-          {dateRange.from?.toLocaleDateString()} ~{" "}
-          {dateRange.to?.toLocaleDateString()}
+          {date.from?.toLocaleDateString()} ~ {date.to?.toLocaleDateString()}
         </button>
         <div
           tabIndex={0}
