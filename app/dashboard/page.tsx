@@ -21,6 +21,10 @@ function DashboardPage() {
         <SendStatusCard />
         <RecentSendMessageCard />
       </div>
+      <div className="grid grid-cols-2 lg:grid-rows-1 max-lg:grid-cols-1 gap-4">
+        <SendStatusCard />
+        <RecentSendMessageCard />
+      </div>
     </main>
   );
 }

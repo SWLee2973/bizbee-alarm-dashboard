@@ -1,11 +1,10 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "@/globals.css";
-import NavBar from "@/components/ui/NavBar";
-import Header from "@/components/ui/Header";
-import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import Layout from "@/components/provider/layout";
 import { QueryProvider } from "@/components/provider/query";
 import SessionProvider from "@/components/provider/session";
+import "@/globals.css";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
+import type { Metadata } from "next";
+import localFont from "next/font/local";
 
 const pretendard = localFont({
   src: "../public/fonts/PretendardVariable.woff2",
@@ -26,16 +25,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={pretendard.variable}>
-      <body
-        className={`${pretendard.className} antialiased md:flex min-h-screen min-w-[360px]`}
-      >
+      <body className={`${pretendard.className} antialiased`}>
         <QueryProvider>
           <SessionProvider>
-            <NavBar />
-            <div className="flex flex-1 md:pe-4 md:py-4 max-md:min-h-[calc(100svh-96px)] max-md:px-4 flex-col">
-              <Header />
-              {children}
-            </div>
+            <Layout>{children}</Layout>
           </SessionProvider>
           <ReactQueryDevtools />
         </QueryProvider>

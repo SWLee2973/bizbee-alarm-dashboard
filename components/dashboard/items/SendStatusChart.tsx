@@ -17,6 +17,8 @@ function SendStatusChart() {
   const moveProjectPage = (e: CategoricalChartState) => {
     const projectName = e.activeLabel;
 
+    if (!projectName) return;
+
     redirect(`/projects/${projectName}`);
   };
 
