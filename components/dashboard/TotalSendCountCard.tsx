@@ -9,7 +9,7 @@ function TotalSendCountCard() {
       <div className="card-body flex flex-col justify-between">
         <h3 className="text-lg font-semibold align-text-top">총 발송 수</h3>
         <Link href="/projects" className="flex justify-end">
-          <span className="text-2xl font-semibold underline">
+          <span className="text-xl font-semibold underline">
             {sendCountData.totalRequests} 건
           </span>
         </Link>

@@ -26,18 +26,13 @@ function DashboardDatePicker() {
       <div className="dropdown dropdown-end">
         <button
           tabIndex={0}
-          // popoverTarget="rdp-popover"
-          className="input input-border cursor-pointer bg-transparent w-fit"
-          // style={{ anchorName: "--rdp" } as React.CSSProperties}
+          className="input rounded-md border-transparent cursor-pointer bg-accent text-accent-content w-fit"
         >
           {date.from?.toLocaleDateString()} ~ {date.to?.toLocaleDateString()}
         </button>
         <div
           tabIndex={0}
-          // popover="auto"
-          // id="rdp-popover"
           className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-md"
-          // style={{ positionAnchor: "--rdp" } as React.CSSProperties}
         >
           <DayPicker
             required

@@ -1,5 +1,5 @@
 import { IResponseError } from "@/types";
-import { getSession } from "../serverActions/auth";
+import { getSession, signOut } from "../serverActions/auth";
 import { Session } from "next-auth";
 
 type TOptions<TBody = unknown> = Omit<RequestInit, "headers" | "body"> & {
@@ -11,7 +11,13 @@ type TOptions<TBody = unknown> = Omit<RequestInit, "headers" | "body"> & {
 
 async function getSessionInfo(): Promise<Session | null> {
   if (typeof window === "undefined") {
-    return await getSession();
+    try {
+      const session = await getSession();
+
+      return session;
+    } catch (error) {
+      throw new Error("서버에서 세션 정보를 가져오는데 실패했습니다.");
+    }
   }
 
   try {
@@ -71,6 +77,10 @@ export class FetchClient {
       headers: _headers,
       body: body ? JSON.stringify(body) : undefined,
     });
+
+    if (response.status === 403) {
+      return {} as TResponse;
+    }
 
     const data = await response.json();
 

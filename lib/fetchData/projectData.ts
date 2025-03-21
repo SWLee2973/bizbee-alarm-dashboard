@@ -1,6 +1,5 @@
 import { IProjectsListResponse } from "@/types";
 import { api } from "../utils";
-import { getSession } from "../serverActions";
 
 export async function fetchProjects() {
   try {
