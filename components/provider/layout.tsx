@@ -19,7 +19,7 @@ function Layout({ children }: ILayoutProps) {
 
   return (
     <div
-      className="flex-1 md:flex h-screen min-w-[360px]"
+      className="flex-1 md:flex h-screen min-w-[360px] max-md:h-fit"
       onWheel={handleWheel}
     >
       <NavBar />

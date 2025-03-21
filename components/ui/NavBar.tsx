@@ -11,8 +11,8 @@ function NavBar() {
   const session = useSession();
 
   return (
-    <div className="md:h-screen md:w-60 max-md:w-full p-4">
-      <nav className="bg-base-300 md:h-full rounded-md max-[512px]:py-2 p-1 max-md:items-center max-md:flex max-md:justify-between">
+    <div className="md:h-screen md:w-60 max-md:w-full max-md:sticky max-md:top-0 max-md:z-50 p-4">
+      <nav className="bg-base-300 md:h-full rounded-md shadow-xl max-[512px]:py-2 p-1 max-md:items-center max-md:flex max-md:justify-between">
         <h1 className="sr-only">네비게이션 바</h1>
         <div className="flex items-center">
           <DropdownNavLinks />
