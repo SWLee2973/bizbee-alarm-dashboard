@@ -52,7 +52,7 @@ function ProjectsMainPageNavigator() {
             <li
               key={link.name}
               className={clsx("rounded-md p-2 whitespace-nowrap", {
-                "bg-primary": pathname === link.href,
+                "bg-secondary": pathname === link.href,
                 "hover:bg-accent": pathname !== link.href,
               })}
             >
