@@ -13,7 +13,7 @@ function NavLinks() {
   const pathname = usePathname();
 
   return (
-    <ul className="md:w-full flex max-md:menu md:menu-vertical max-md:menu-horizontal rounded-md">
+    <ul className="md:w-full flex gap-y-2 max-md:menu md:menu-vertical max-md:menu-horizontal rounded-md">
       {links.map((link) => (
         <NavLinkItem key={link.name} link={link} pathname={pathname} />
       ))}
@@ -34,15 +34,15 @@ function NavLinkItem({ link, pathname }: { link: IRoute; pathname: string }) {
         height: "auto",
         padding: "4px",
         rowGap: "4px",
-        duration: 1.2,
-        ease: "power4.out",
+        duration: 0.5,
+        ease: "power4.in",
       });
     } else {
       gsap.to(submenuRef.current, {
         height: 0,
         padding: 0,
         rowGap: 0,
-        duration: 1,
+        duration: 0.5,
         ease: "power4.out",
       });
     }
@@ -83,7 +83,7 @@ function NavLinkItem({ link, pathname }: { link: IRoute; pathname: string }) {
               key={child.name}
               className={clsx("flex py-2 w-full rounded-md", {
                 "bg-secondary": pathname === child.href,
-                "hover:bg-base-200": pathname !== child.href,
+                "hover:bg-accent": pathname !== child.href,
               })}
             >
               <Link

@@ -18,7 +18,7 @@ function NavBar() {
           <DropdownNavLinks />
           <BizbeeLogo />
         </div>
-        <section className="flex-1 md:items-center max-md:hidden">
+        <section className="flex-1 p-1 md:items-center max-md:hidden">
           <NavLinks />
         </section>
         <div className="flex items-center gap-x-4 flex-row md:hidden w-fit pe-2">
