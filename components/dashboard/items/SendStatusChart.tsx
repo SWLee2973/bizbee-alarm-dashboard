@@ -1,11 +1,14 @@
 "use client";
 
 import { sendCountData } from "@/lib";
+import clsx from "clsx";
 import { redirect } from "next/navigation";
 import {
+  Bar,
+  BarChart,
   CartesianGrid,
-  Line,
-  LineChart,
+  Legend,
+  Rectangle,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -24,32 +27,34 @@ function SendStatusChart() {
 
   return (
     <ResponsiveContainer width="100%" height="100%">
-      <LineChart
+      <BarChart
         width={500}
-        height={400}
+        height={300}
         data={sendCountData.projectMetrics}
         margin={{
-          top: 10,
-          right: 30,
-          left: 0,
-          bottom: 0,
+          top: 15,
+          right: 10,
+          left: -20,
+          bottom: 5,
         }}
-        style={{ cursor: "pointer" }}
         onClick={moveProjectPage}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="projectId" padding={{ left: 20, right: 20 }} />
+        <XAxis dataKey="projectId" />
         <YAxis />
         <Tooltip content={<CustomTooltip />} />
-        <Line
-          type="monotone"
-          dataKey="totalRequests"
-          stroke="#8884d8"
-          activeDot={{ r: 8 }}
+        <Legend content={<CustomLegend />} />
+        <Bar
+          dataKey="totalSuccess"
+          fill="#00cd89"
+          activeBar={<Rectangle fill="#00b2f9" />}
         />
-        <Line type="monotone" dataKey="totalSuccess" stroke="#82ca9d" />
-        <Line type="monotone" dataKey="totalFailures" stroke="#ffc658" />
-      </LineChart>
+        <Bar
+          dataKey="totalFailures"
+          fill="#ff5673"
+          activeBar={<Rectangle fill="#fe288b" />}
+        />
+      </BarChart>
     </ResponsiveContainer>
   );
 }
@@ -73,8 +78,26 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
-const CustomLegend = () => {
-  return null;
+const CustomLegend = ({ payload }: any) => {
+  return (
+    <ul className="ps-8 m-0 text-center flex flex-row items-center justify-center">
+      {payload.map((item: any) => (
+        <li key={item.dataKey} className="inline-block mr-2.5">
+          <svg
+            className="inline-block align-middle mr-1"
+            width="14"
+            height="14"
+            viewBox="0 0 32 32"
+          >
+            <path stroke="none" fill={item.color} d="M0,4h32v24h-32z" />
+          </svg>
+          <span className="font-semibold">
+            {dataKeyNames[item.dataKey as keyof typeof dataKeyNames]}
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
 };
 
 const dataKeyNames = {
