@@ -1,6 +1,6 @@
 "use client";
 
-import { links } from "@/lib";
+import { links, useOutsideClick } from "@/lib";
 import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
 import gsap from "gsap";
@@ -38,9 +38,15 @@ function ProjectsMainPageNavigator() {
     }
   }, [isOpened]);
 
+  const closeMenu = () => setIsOpened(false);
+  const dropdownRef = useOutsideClick(closeMenu);
+
   return (
     <nav className="md:hidden flex justify-end sticky top-22 z-1">
-      <div className="flex rounded-md p-1 bg-base-300 shadow-xl">
+      <div
+        ref={dropdownRef}
+        className="flex rounded-md p-1 bg-base-300 shadow-xl"
+      >
         <ul className="navigator flex gap-x-2 overflow-hidden">
           {linkList?.map((link) => (
             <li
@@ -50,7 +56,7 @@ function ProjectsMainPageNavigator() {
                 "hover:bg-accent": pathname !== link.href,
               })}
             >
-              <Link href={link.href} onClick={() => setIsOpened(false)}>
+              <Link href={link.href} onClick={closeMenu}>
                 <span
                   className={clsx({
                     "text-primary-content": pathname === link.href,
