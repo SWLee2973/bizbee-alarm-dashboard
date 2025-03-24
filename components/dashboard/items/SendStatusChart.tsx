@@ -36,6 +36,7 @@ function SendStatusChart() {
           left: -20,
           bottom: 5,
         }}
+        style={{ cursor: "pointer" }}
         onClick={moveProjectPage}
       >
         <CartesianGrid strokeDasharray="3 3" />
