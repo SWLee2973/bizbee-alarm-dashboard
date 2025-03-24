@@ -1,10 +1,10 @@
-import { IProjectsListResponse } from "@/types";
+import { IProjectMetricsResponse } from "@/types";
 import { api } from "../utils";
 
 export async function fetchProjects() {
   try {
-    const response = await api.get<IProjectsListResponse[]>(
-      "/dashboard/projects"
+    const response = await api.get<IProjectMetricsResponse>(
+      "/dashboard/metrics"
     );
 
     return response;

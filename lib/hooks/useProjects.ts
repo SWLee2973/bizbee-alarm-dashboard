@@ -1,12 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import { api } from "../utils";
-import { IProjectsListResponse } from "@/types";
+import { IProjectMetricsResponse } from "@/types";
 
 export const useProjects = () => {
   return useQuery({
     queryKey: ["projects"],
     queryFn: async () => {
-      const response = await api.get<IProjectsListResponse[]>(
+      const response = await api.get<IProjectMetricsResponse>(
         "/dashboard/projects"
       );
 

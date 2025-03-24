@@ -1,7 +1,6 @@
 "use client";
 
 import { sendCountData } from "@/lib";
-import clsx from "clsx";
 import { redirect } from "next/navigation";
 import {
   Bar,
@@ -59,7 +58,7 @@ function SendStatusChart() {
   );
 }
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
     return (
       <div className="bg-base-300 p-2 rounded-md">
