@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@auth/core": "^0.38.0",
+    "@gsap/react": "^2.1.2",
     "@number-flow/react": "^0.5.8",
     "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query": "^5.67.2",
@@ -24,6 +25,7 @@
     "clsx": "^2.1.1",
     "concurrently": "^9.1.2",
     "dayjs": "^1.11.13",
+    "gsap": "^3.12.7",
     "lodash": "^4.17.21",
     "next": "15.2.1",
     "next-auth": "5.0.0-beta.25",
