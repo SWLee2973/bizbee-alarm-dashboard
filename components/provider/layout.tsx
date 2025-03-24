@@ -27,7 +27,7 @@ function Layout({ children }: ILayoutProps) {
         <Header />
         <div
           ref={scrollableRef}
-          className="overflow-y-auto pe-4 rounded-md overscroll-contain"
+          className="overflow-y-auto pe-4 rounded-md overscroll-contain pb-1"
         >
           {children}
         </div>
