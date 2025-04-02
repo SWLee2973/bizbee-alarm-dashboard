@@ -23,7 +23,7 @@ function Breadcrumbs() {
 
   const breadcrumbs = findBreadcrumbs(links, pathname);
 
-  if (!breadcrumbs) return null;
+  if (!breadcrumbs) return <div />;
 
   return (
     <nav

@@ -25,7 +25,7 @@ function Layout({ children }: ILayoutProps) {
       <NavBar />
       <div
         ref={scrollableRef}
-        className="flex flex-1 overscroll-contain overflow-auto pb-4 max-md:h-100svh max-md:px-4 flex-col"
+        className="flex flex-1 overscroll-contain overflow-auto pb-4 max-md:h-[calc(100svh-76px)] max-md:px-4 flex-col"
       >
         <Header />
         <div className="flex-1 md:pe-4.5 md:ps-0.5">{children}</div>
