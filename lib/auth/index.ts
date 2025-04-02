@@ -25,7 +25,17 @@ export const {
           const params = parsedCredentials.data;
           const user = await login(params);
 
-          return user;
+          if (user === null) return null;
+
+          return {
+            id: user.userId,
+            corpCd: user.corpCd,
+            userId: user.userId,
+            role: user.role,
+            token: user.token,
+            name: user.userId,
+            email: user.userId,
+          };
         }
 
         return null;
