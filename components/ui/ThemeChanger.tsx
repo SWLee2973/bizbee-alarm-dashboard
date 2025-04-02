@@ -17,7 +17,7 @@ function ThemeChanger() {
       <button
         tabIndex={0}
         role="button"
-        className="btn w-36 md:bg-base-300 font-[Noto_Sans_KR] rounded-md flex items-center justify-between"
+        className="btn w-36 font-[Noto_Sans_KR] rounded-md flex items-center justify-between"
       >
         {themeName?.toUpperCase() ?? "DEFAULT"}
         <svg

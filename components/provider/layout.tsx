@@ -23,14 +23,12 @@ function Layout({ children }: ILayoutProps) {
       onWheel={handleWheel}
     >
       <NavBar />
-      <div className="flex flex-1 md:py-4 max-md:pb-4 max-md:min-h-[calc(100svh-96px)] max-md:ps-4 flex-col">
+      <div
+        ref={scrollableRef}
+        className="flex flex-1 overscroll-contain overflow-auto pb-4 max-md:h-100svh max-md:px-4 flex-col"
+      >
         <Header />
-        <div
-          ref={scrollableRef}
-          className="overflow-auto scrollbar overscroll-contain md:pb-1 md:pe-4"
-        >
-          {children}
-        </div>
+        <div className="flex-1 md:pe-4.5 md:ps-0.5">{children}</div>
       </div>
     </div>
   );

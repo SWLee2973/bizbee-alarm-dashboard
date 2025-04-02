@@ -1,10 +1,9 @@
 "use client";
 
-import React, { useActionState } from "react";
-import UserIcon from "@/public/svg/user.svg";
-import KeyIcon from "@/public/svg/key.svg";
-import { Logo } from "../svgIcons";
 import { signInWithCredentials } from "@/lib";
+import KeyIcon from "@/public/svg/key.svg";
+import UserIcon from "@/public/svg/user.svg";
+import { useActionState } from "react";
 
 function LoginForm() {
   const [errorMessage, formAction, isPending] = useActionState(

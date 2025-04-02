@@ -3,7 +3,7 @@ import React from "react";
 
 function LoginPage() {
   return (
-    <main className="flex items-center justify-center flex-1 pb-32">
+    <main className="flex items-center h-full border-2 justify-center pb-32">
       <h1 className="sr-only">로그인 페이지</h1>
       <LoginForm />
     </main>
