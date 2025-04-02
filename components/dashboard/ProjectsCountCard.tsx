@@ -1,9 +1,9 @@
-import { fetchProjects, sendCountData } from "@/lib";
+import { sendCountData } from "@/lib";
 import Link from "next/link";
 import RollingNumber from "../ui/RollingNumber";
 
 async function ProjectsCountCard() {
-  const data = await fetchProjects();
+  // const data = await fetchProjects();
   return (
     <section className="card bg-base-200 h-fit card-md flex-1 shadow-sm rounded-md">
       <div className="card-body flex flex-col justify-between">

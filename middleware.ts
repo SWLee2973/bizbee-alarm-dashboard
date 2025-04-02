@@ -12,7 +12,7 @@ const matchersForAuth = [
   "/users",
   "/users/*all",
 ];
-const matchersForLogIn = ["/login/"];
+const matchersForLogIn = ["/login"];
 export async function middleware(request: NextRequest) {
   if (isMatch(request.nextUrl.pathname, matchersForAuth)) {
     return (await getSession())

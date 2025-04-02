@@ -1,14 +1,25 @@
 import { User } from "next-auth";
-import { api } from "../utils";
 import { ILoginParams } from "@/types";
 
-const login = async (params: ILoginParams): Promise<User> => {
-  const response = await api.post<User, ILoginParams>("/auth/login", {
-    needAuth: false,
-    body: params,
-  });
+const login = async (params: ILoginParams): Promise<User | null> => {
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/auth/login`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(params),
+    }
+  );
 
-  return response;
+  if (!response.ok) {
+    return null;
+  }
+
+  const user = (await response.json()) as User;
+
+  return user;
 };
 
 export default login;
