@@ -58,7 +58,7 @@ function ProjectsMainPageNavigator() {
             >
               <Link href={link.href} onClick={closeMenu}>
                 <span
-                  className={clsx({
+                  className={clsx("text-sm font-semibold", {
                     "text-primary-content": pathname === link.href,
                   })}
                 >
