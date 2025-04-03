@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "concurrently \"pnpm dev:next\" \"pnpm dev:app\"",
-    "dev:next": "next dev",
+    "dev:next": "next dev --turbopack",
     "dev:server": "json-server --watch lib/constants/db.json --port 3001",
     "dev:app": "pnpm build:electron && pnpm dev:electron",
     "dev:electron": "electron dist/main.mjs",
@@ -18,8 +18,6 @@
     "@auth/core": "^0.38.0",
     "@gsap/react": "^2.1.2",
     "@number-flow/react": "^0.5.8",
-    "@sentry/nextjs": "^9.10.1",
-    "@svgr/webpack": "^8.1.0",
     "@tanstack/react-query": "^5.67.2",
     "@tanstack/react-query-devtools": "^5.67.2",
     "@tanstack/react-query-next-experimental": "^5.67.2",
@@ -31,6 +29,7 @@
     "lodash": "^4.17.21",
     "next": "15.2.1",
     "next-auth": "5.0.0-beta.25",
+    "next-safe-action": "^7.10.4",
     "path-to-regexp": "^8.2.0",
     "react": "^19.0.0",
     "react-day-picker": "^9.6.2",
@@ -45,6 +44,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@stylistic/eslint-plugin": "^4.2.0",
+    "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
@@ -61,5 +61,12 @@
     "typescript": "^5",
     "typescript-eslint": "^8.26.0",
     "vite": "^6.2.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "electron",
+      "esbuild",
+      "sharp"
+    ]
   }
 }

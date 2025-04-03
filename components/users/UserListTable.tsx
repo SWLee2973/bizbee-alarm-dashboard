@@ -46,7 +46,7 @@ function UserListTable({ users }: IUserListTableProps) {
   });
 
   return (
-    <div className="rounded-md overflow-hidden flex-1">
+    <div className="rounded-md overflow-hidden flex-1 border-[0.5px] border-base-100 shadow-md">
       <table className="table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -55,7 +55,7 @@ function UserListTable({ users }: IUserListTableProps) {
               className="bg-primary text-primary-content"
             >
               {headerGroup.headers.map((header) => (
-                <th>
+                <th key={header.id}>
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -68,21 +68,29 @@ function UserListTable({ users }: IUserListTableProps) {
           ))}
         </thead>
         <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr
-              key={row.id}
-              className="cursor-pointer hover:bg-base-300"
-              onClick={() =>
-                router.push(`/users/detail?userId=${row.original.userId}`)
-              }
-            >
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="">
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
+          {users.length ? (
+            table.getRowModel().rows.map((row) => (
+              <tr
+                key={row.id}
+                className="cursor-pointer hover:bg-base-300"
+                onClick={() =>
+                  router.push(`/users/detail?userId=${row.original.userId}`)
+                }
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan={columnHeadersArray.length} className="text-center">
+                검색 결과가 없습니다.
+              </td>
             </tr>
-          ))}
+          )}
         </tbody>
       </table>
     </div>
