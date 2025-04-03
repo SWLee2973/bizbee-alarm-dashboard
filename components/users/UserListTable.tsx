@@ -46,7 +46,7 @@ function UserListTable({ users }: IUserListTableProps) {
   });
 
   return (
-    <div className="rounded-md overflow-hidden flex-1 border-[0.5px] border-base-100 shadow-md">
+    <div className="rounded-md overflow-hidden flex-1 shadow-md">
       <table className="table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
