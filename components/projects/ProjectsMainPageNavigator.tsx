@@ -1,6 +1,6 @@
 "use client";
 
-import { links, useOutsideClick } from "@/lib";
+import { navLinks, useOutsideClick } from "@/lib";
 import { useGSAP } from "@gsap/react";
 import clsx from "clsx";
 import gsap from "gsap";
@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 
 function ProjectsMainPageNavigator() {
   const pathname = usePathname();
-  const linkList = links.find((link) => link.href === "/projects")?.children;
+  const linkList = navLinks.find((link) => link.href === "/projects")?.children;
 
   if (!linkList?.some((link) => link.href === pathname)) return null;
 

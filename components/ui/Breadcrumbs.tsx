@@ -1,4 +1,4 @@
-import { links } from "@/lib";
+import { paths } from "@/lib";
 import { findBreadcrumbs } from "@/lib/utils/breadcrumbs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,7 +7,7 @@ import { useMemo } from "react";
 function Breadcrumbs() {
   const pathname = usePathname();
   const breadcrumbs = useMemo(
-    () => findBreadcrumbs(links, pathname),
+    () => findBreadcrumbs(paths, pathname),
     [pathname]
   );
 

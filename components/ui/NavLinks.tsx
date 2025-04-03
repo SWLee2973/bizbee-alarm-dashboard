@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
-import { links } from "@/lib";
+import { navLinks } from "@/lib";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
@@ -14,7 +14,7 @@ function NavLinks() {
 
   return (
     <ul className="md:w-full flex gap-y-2 max-md:menu md:menu-vertical max-md:menu-horizontal rounded-md">
-      {links.map((link) => (
+      {navLinks.map((link) => (
         <NavLinkItem key={link.name} link={link} pathname={pathname} />
       ))}
     </ul>

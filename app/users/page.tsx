@@ -7,20 +7,19 @@ import UserSearch from "@/components/users/UserSearch";
 import Link from "next/link";
 
 interface IUserPageProps {
-  searchParams: Promise<Record<string, string | undefined>>;
+  searchParams: Promise<{ [key: string]: string | undefined }>;
 }
 
 async function UsersPage({ searchParams }: IUserPageProps) {
-  const { searchText } = await searchParams;
+  const { searchText = "" } = await searchParams;
 
   // if (!searchText) return <UserSearch />;
 
   const result = await api.get<IUser[]>(`/user/list`);
   const users = result.filter(
-    (user) =>
-      user.name.includes(searchText ?? "") ||
-      user.userId.includes(searchText ?? "")
+    (user) => user.name.includes(searchText) || user.userId.includes(searchText)
   );
+  // console.log("users : ", users);
 
   return (
     <main className="flex-1 flex flex-col gap-y-4 h-full">
@@ -34,13 +33,7 @@ async function UsersPage({ searchParams }: IUserPageProps) {
           사용자 등록
         </Link>
       </div>
-      <UserListTable
-        users={users.filter(
-          (user) =>
-            user.name.includes(searchText ?? "") ||
-            user.userId.includes(searchText ?? "")
-        )}
-      />
+      <UserListTable users={users} />
     </main>
   );
 }

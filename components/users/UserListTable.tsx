@@ -1,16 +1,17 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
+  getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import dayjs from "dayjs";
 
 import { useRouter } from "next/navigation";
 import { IUserTableRow } from "@/types";
+import clsx from "clsx";
 
 interface IUserListTableProps {
   users: Pick<IUserTableRow, "userId" | "name" | "role">[];
@@ -39,14 +40,25 @@ function UserListTable({ users }: IUserListTableProps) {
     })
   );
 
+  const data = useMemo(
+    () => users.map((user, No) => ({ ...user, No: No + 1 })),
+    [users]
+  );
+
   const table = useReactTable({
-    data: users.map((user, No) => ({ ...user, No: No + 1 })),
+    data,
     columns,
+    initialState: {
+      pagination: {
+        pageSize: 10,
+      },
+    },
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
   });
 
   return (
-    <div className="rounded-md overflow-hidden flex-1 shadow-md">
+    <div className="flex flex-col rounded-md overflow-hidden justify-between flex-1 shadow-md">
       <table className="table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -93,6 +105,36 @@ function UserListTable({ users }: IUserListTableProps) {
           )}
         </tbody>
       </table>
+      <div className="flex mb-20 justify-center">
+        <div className="join rounded-md">
+          {/* {table.getState().pagination.pageIndex + 1}
+          {`[${table.getFilteredRowModel().rows.length}]`} */}
+          <button
+            className={clsx("join-item btn", {
+              "btn-disable": table.getState().pagination.pageIndex === 0,
+            })}
+            onClick={() => table.setPageIndex(0)}
+          >
+            이전
+          </button>
+          <button
+            className={clsx("join-item btn", {
+              "btn-active": table.getState().pagination.pageIndex === 0,
+            })}
+            onClick={() => table.setPageIndex(0)}
+          >
+            1
+          </button>
+          <button
+            className={clsx("join-item btn", {
+              "btn-active": table.getState().pagination.pageIndex === 0,
+            })}
+            onClick={() => table.setPageIndex(0)}
+          >
+            다음
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

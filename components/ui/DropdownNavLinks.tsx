@@ -1,4 +1,4 @@
-import { links } from "@/lib";
+import { navLinks } from "@/lib";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -21,9 +21,9 @@ function DropdownNavLinks() {
         tabIndex={0}
         className="dropdown-content flex flex-col gap-y-1 menu bg-base-300 rounded-md z-1 w-48 p-2 mt-5 -ms-1 shadow-sm"
       >
-        {links.map((link) => (
+        {navLinks.map((link) => (
           <li
-            key={link.name}
+            key={link.href}
             className={clsx("md:w-full md:h-10 rounded-md", {
               "bg-primary":
                 pathname === link.href || pathname.startsWith(link.href + "/"),
