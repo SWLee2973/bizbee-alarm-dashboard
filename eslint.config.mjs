@@ -1,98 +1,39 @@
-import { FlatCompat } from "@eslint/eslintrc";
-import eslint from "@eslint/js";
-import stylisticJs from "@stylistic/eslint-plugin";
-import reactHooks from "eslint-plugin-react-hooks";
-import { dirname } from "path";
-import tseslint from "typescript-eslint";
-import { fileURLToPath } from "url";
+// eslint.config.mjs
+import js from '@eslint/js';
+import next from 'eslint-plugin-next';
+import globals from 'globals';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
-export default tseslint.config(
+/** @type {import('eslint').Linter.FlatConfig} */
+export default [
+  js.configs.recommended, // JS 기본 권장 설정
   {
-    ignores: [".next/*", "node_modules/*"],
-  },
-  eslint.configs.recommended,
-  tseslint.configs.strictTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
-  {
+    files: ['**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx'],
     languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+      parser: await import('@typescript-eslint/parser'), // TS 파서 추가 (TSX 지원)
       parserOptions: {
-        projectService: true,
-        tsconfigRootDir: import.meta.dirname,
+        project: true,
       },
     },
-  },
-  stylisticJs.configs.customize({
-    arrowParens: true,
-    indent: 2,
-    semi: true,
-  }),
-  {
     plugins: {
-      "react-hooks": reactHooks,
-    },
-    rules: reactHooks.configs.recommended.rules,
-  },
-  {
-    plugins: {
-      "@stylistic": stylisticJs,
+      '@typescript-eslint': await import('@typescript-eslint/eslint-plugin'),
+      prettier: await import('eslint-plugin-prettier'),
+      next,
     },
     rules: {
-      "@stylistic/indent": ["error", 2],
-      "@stylistic/arrow-parens": ["error", "as-needed"],
-      "@stylistic/quotes": [
-        "error",
-        "double",
-        {
-          allowTemplateLiterals: true,
-        },
-      ],
-      "@stylistic/jsx-quotes": ["error"],
-      "@stylistic/semi": ["error"],
-      "@stylistic/comma-dangle": ["none"],
-      "@stylistic/keyword-spacing": ["error"],
-      "@stylistic/space-before-blocks": ["error"],
-      "@stylistic/space-infix-ops": ["error"],
-      "@stylistic/member-delimiter-style": [
-        "error",
-        {
-          multiline: {
-            delimiter: "comma",
-            requireLast: true,
-          },
-          singleline: {
-            delimiter: "comma",
-            requireLast: false,
-          },
-          overrides: {
-            interface: {
-              multiline: {
-                delimiter: "semi",
-                requireLast: true,
-              },
-            },
-            typeLiteral: {
-              multiline: {
-                delimiter: "semi",
-                requireLast: true,
-              },
-            },
-          },
-        },
-      ],
+      // TypeScript 관련 추천 규칙 사용
+      ...((await import('@typescript-eslint/eslint-plugin')).configs.recommended.rules),
+      // Next.js 권장 규칙 사용
+      ...next.configs.recommended.rules,
+      'prettier/prettier': 'warn',
     },
   },
-  ...compat.config({
-    extends: ["next", "next/core-web-vitals"],
-  }),
   {
-    files: ["**/*.js", "**/*.mjs"],
-    extends: [tseslint.configs.disableTypeChecked],
+    ignores: ['.next/**', 'node_modules/**', 'dist/**'],
   },
-);
+];

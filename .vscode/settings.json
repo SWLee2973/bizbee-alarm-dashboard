@@ -4,13 +4,14 @@
     "source.fixAll": "always",
     "source.fixAll.eslint": "always"
   },
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "eslint.validate": [
     "javascript",
     "javascriptreact",
     "typescript",
     "typescriptreact"
   ],
+  "prettier.enable": false,
   "[javascript]": {
     "editor.defaultFormatter": "dbaeumer.vscode-eslint",
     // "editor.formatOnSave": true
