@@ -1,13 +1,18 @@
-import React, { useMemo } from "react";
+import PageHeader from "@/components/ui/PageHeader";
+import UserListTable from "@/components/users/UserListTable";
+import UserSearch from "@/components/users/UserSearch";
 import { api } from "@/lib";
 import { IUser } from "@/types";
-import UserListTable from "@/components/users/UserListTable";
-import PageHeader from "@/components/ui/PageHeader";
-import UserSearch from "@/components/users/UserSearch";
 import Link from "next/link";
 
 interface IUserPageProps {
   searchParams: Promise<{ [key: string]: string | undefined }>;
+}
+
+export async function generateMetadata() {
+  return {
+    title: "bizbee Notice - 사용자 관리",
+  };
 }
 
 async function UsersPage({ searchParams }: IUserPageProps) {
