@@ -22,8 +22,8 @@ function ServiceRegistrationStatusCard() {
       <h3 className="text-center mt-4 max-md:mt-2 font-semibold">
         서비스 등록 현황
       </h3>
-      <div className="w-full h-80 max-lg:h-60 max-sm:h-40 flex justify-center md:pb-4">
-        <div className="w-fit aspect-square">
+      <div className="w-full h-60 max-lg:h-50 max-sm:h-40 flex justify-center md:pb-4 max-lg:px-2">
+        <div className="w-4/5 aspect-square">
           <ServiceRegistrationStatusChart data={data} />
         </div>
       </div>

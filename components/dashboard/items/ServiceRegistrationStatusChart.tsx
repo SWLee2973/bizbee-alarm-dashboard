@@ -15,6 +15,7 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
+  LabelList,
 } from "recharts";
 
 interface IServiceRegistrationStatusChartProps {
@@ -46,7 +47,7 @@ function ServiceRegistrationStatusChart({
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
 
-      const tooltipZone = document.querySelector(".legend");
+      const tooltipZone = document.querySelector(".legend-service");
       if (tooltipZone && !tooltipZone.contains(e.target as Node)) {
         setLegendHoverKey(null);
         setActiveKey(null);
@@ -78,7 +79,7 @@ function ServiceRegistrationStatusChart({
           <Tooltip content={CustomTooltip} />
           <Legend
             content={({ payload }) => (
-              <ul className="legend m-0 text-center flex flex-row items-center justify-center max-md:ps-2 max-md:h-11">
+              <ul className="legend-service m-0 text-center flex flex-row items-center justify-center max-md:ps-2 max-md:h-11">
                 {payload?.map((item: any) => (
                   <li
                     key={item.dataKey}
@@ -111,7 +112,12 @@ function ServiceRegistrationStatusChart({
             shape={(props: any) => (
               <CustomBarShape dataKey="iOS" activeKey={activeKey} {...props} />
             )}
-          />
+          >
+            <LabelList 
+              dataKey="iOS"
+              fill="#fff"
+            />
+          </Bar>
           <Bar
             dataKey="Android"
             stackId="a"
@@ -123,7 +129,12 @@ function ServiceRegistrationStatusChart({
                 {...props}
               />
             )}
-          />
+          >
+            <LabelList 
+              dataKey="Android"
+              fill="#fff"
+            />
+          </Bar>
           <Bar
             dataKey="Android/iOS"
             stackId="a"
@@ -135,7 +146,12 @@ function ServiceRegistrationStatusChart({
                 {...props}
               />
             )}
-          />
+          >
+            <LabelList 
+              dataKey="Android/iOS"
+              fill="#fff"
+            />
+          </Bar>
         </BarChart>
       </ResponsiveContainer>
       {legendHoverKey && (
@@ -164,17 +180,17 @@ const CustomBarShape = ({
   const isActive = !activeKey || activeKey === dataKey;
 
   return (
-    <rect
-      x={x}
-      y={y}
-      width={width}
-      height={height}
-      fill={fill}
-      className={clsx("transition-opacity duration-300 ease-in-out", {
-        "opacity-100": isActive,
-        "opacity-30": !isActive,
-      })}
-    />
+      <rect
+        x={x}
+        y={y}
+        width={width}
+        height={height}
+        fill={fill}
+        className={clsx("transition-opacity duration-300 ease-in-out", {
+          "opacity-100": isActive,
+          "opacity-30": !isActive,
+        })}
+      />
   );
 };
 
