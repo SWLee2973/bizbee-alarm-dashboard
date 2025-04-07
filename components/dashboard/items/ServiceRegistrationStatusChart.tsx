@@ -2,7 +2,9 @@
 
 import Android from "@/components/svgIcons/Android";
 import IOS from "@/components/svgIcons/IOS";
+import RollingNumber from "@/components/ui/RollingNumber";
 import React from "react";
+import { useMemo } from "react";
 import {
   BarChart,
   Bar,
@@ -69,18 +71,23 @@ export default ServiceRegistrationStatusChart;
 
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length) {
+    const totalCount = useMemo(
+      () => payload.reduce((acc: number, item: any) => acc + item.value, 0),
+      [payload]
+    );
+
     return (
       <div className="bg-base-300 p-2 rounded-md">
         <strong className="text-lg text-base-content">
-          총계:{" "}
-          {payload.reduce((acc: number, item: any) => acc + item.value, 0)}
+          총계: <RollingNumber value={totalCount} />
         </strong>
         {payload.map((item: any) => (
           <span
             key={item.name}
-            className="text-md text-base-content flex flex-row"
+            className="text-md text-base-content flex flex-row items-center"
           >
-            {dataKeyIcon[item.name as keyof typeof dataKeyIcon]}: {item.value}
+            {dataKeyIcon[item.name as keyof typeof dataKeyIcon]}:{" "}
+            <RollingNumber value={item.value} />
           </span>
         ))}
       </div>
