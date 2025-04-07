@@ -1,3 +1,4 @@
+import ServiceRegistrationStatusChart from "@/components/dashboard/items/ServiceRegistrationStatusChart";
 import ProjectsCountCard from "@/components/dashboard/ProjectsCountCard";
 import RecentSendMessageCard from "@/components/dashboard/RecentSendMessageCard";
 import SendFailCountCard from "@/components/dashboard/SendFailCountCard";
@@ -10,11 +11,13 @@ function DashboardPage() {
   return (
     <main className="flex-1 flex flex-col gap-y-4">
       <PageHeader title="대시보드" />
-      <div className="grid grid-cols-4 max-lg:grid-cols-2 gap-4">
-        <ProjectsCountCard />
-        <TotalSendCountCard />
-        <SendSuccessCountCard />
-        <SendFailCountCard />
+      <div className="grid grid-cols-3 max-lg:grid-cols-2 gap-4">
+        <ServiceRegistrationStatusChart />
+        <ServiceRegistrationStatusChart />
+        <ServiceRegistrationStatusChart />
+        <ServiceRegistrationStatusChart />
+        <ServiceRegistrationStatusChart />
+        <ServiceRegistrationStatusChart />
       </div>
       <div className="grid grid-cols-2 lg:grid-rows-1 max-lg:grid-cols-1 gap-4">
         <SendStatusCard />

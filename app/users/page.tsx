@@ -16,13 +16,17 @@ export async function generateMetadata() {
 }
 
 async function UsersPage({ searchParams }: IUserPageProps) {
-  const { searchText = "" } = await searchParams;
+  const { searchText } = await searchParams;
+
+  console.log("searchText : ", searchText);
 
   // if (!searchText) return <UserSearch />;
 
   const result = await api.get<IUser[]>(`/user/list`);
   const users = result.filter(
-    (user) => user.name.includes(searchText) || user.userId.includes(searchText)
+    (user) =>
+      user.name.includes(searchText ?? "") ||
+      user.userId.includes(searchText ?? "")
   );
   // console.log("users : ", users);
 
@@ -33,7 +37,7 @@ async function UsersPage({ searchParams }: IUserPageProps) {
         <UserSearch />
         <Link
           href="/users/add"
-          className="btn btn-secondary text-secondary-content"
+          className="btn btn-square bg-secondary text-secondary-content font-semibold w-fit px-2"
         >
           사용자 등록
         </Link>
