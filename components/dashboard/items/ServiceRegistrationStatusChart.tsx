@@ -17,22 +17,18 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  {
-    name: "사용",
-    Android: 15,
-    iOS: 5,
-    "Android/iOS": 5,
-  },
-  {
-    name: "미사용",
-    Android: 3,
-    iOS: 7,
-    "Android/iOS": 26,
-  },
-];
+interface IServiceRegistrationStatusChartProps {
+  data: {
+    name: string;
+    Android: number;
+    iOS: number;
+    "Android/iOS": number;
+  }[];
+}
 
-function ServiceRegistrationStatusChart() {
+function ServiceRegistrationStatusChart({
+  data,
+}: IServiceRegistrationStatusChartProps) {
   const [activeKey, setActiveKey] = useState<string | null>(null);
   const [legendHoverKey, setLegendHoverKey] = useState<
     "iOS" | "Android" | "Android/iOS" | null
@@ -63,100 +59,93 @@ function ServiceRegistrationStatusChart() {
   }, []);
 
   return (
-    <section className="card bg-base-200 card-md shadow-sm rounded-md">
-      <h3 className="text-center mt-4 max-md:mt-2 font-semibold">
-        서비스 등록 현황
-      </h3>
-      <div className="w-full h-80 max-lg:h-60 max-sm:h-40 flex justify-center md:pb-4">
-        <div className="w-fit aspect-square">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart
-              width={500}
-              height={300}
-              data={data}
-              margin={{
-                top: 15,
-                right: 10,
-                left: -20,
-                bottom: 5,
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis dataKey="name" />
-              <YAxis />
-              <Tooltip content={CustomTooltip} />
-              <Legend
-                content={({ payload }) => (
-                  <ul className="legend m-0 text-center flex flex-row items-center justify-center max-md:ps-2 max-md:h-11">
-                    {payload?.map((item: any) => (
-                      <li
-                        key={item.dataKey}
-                        onMouseOver={(e) => handleMouseEnter(item, e)}
-                        className="mr-2.5 flex flex-row items-center max-md:flex-col gap-1 max-md:justify-between max-md:h-full"
-                      >
-                        <svg
-                          className="inline-block align-middle"
-                          width="14"
-                          height="14"
-                          viewBox="0 0 32 32"
-                        >
-                          <path
-                            stroke="none"
-                            fill={item.color}
-                            d="M0,4h32v24h-32z"
-                          />
-                        </svg>
-                        {dataKeyIcon[item.dataKey as keyof typeof dataKeyIcon]}
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                wrapperStyle={{ left: 10 }}
-              />
-              <Bar
-                dataKey="iOS"
-                stackId="a"
-                fill="#8884d8"
-                shape={(props: any) => (
-                  <CustomBarShape
-                    dataKey="iOS"
-                    activeKey={activeKey}
-                    {...props}
-                  />
-                )}
-              />
-              <Bar
+    <>
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart
+          width={500}
+          height={300}
+          data={data}
+          margin={{
+            top: 15,
+            right: 10,
+            left: -20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="name" />
+          <YAxis />
+          <Tooltip content={CustomTooltip} />
+          <Legend
+            content={({ payload }) => (
+              <ul className="legend m-0 text-center flex flex-row items-center justify-center max-md:ps-2 max-md:h-11">
+                {payload?.map((item: any) => (
+                  <li
+                    key={item.dataKey}
+                    onMouseOver={(e) => handleMouseEnter(item, e)}
+                    className="mr-2.5 flex flex-row items-center max-md:flex-col gap-1 max-md:justify-between max-md:h-full"
+                  >
+                    <svg
+                      className="inline-block align-middle"
+                      width="14"
+                      height="14"
+                      viewBox="0 0 32 32"
+                    >
+                      <path
+                        stroke="none"
+                        fill={item.color}
+                        d="M0,4h32v24h-32z"
+                      />
+                    </svg>
+                    {dataKeyIcon[item.dataKey as keyof typeof dataKeyIcon]}
+                  </li>
+                ))}
+              </ul>
+            )}
+            wrapperStyle={{ left: 10 }}
+          />
+          <Bar
+            dataKey="iOS"
+            stackId="a"
+            fill="#8884d8"
+            shape={(props: any) => (
+              <CustomBarShape dataKey="iOS" activeKey={activeKey} {...props} />
+            )}
+          />
+          <Bar
+            dataKey="Android"
+            stackId="a"
+            fill="#82ca9d"
+            shape={(props: any) => (
+              <CustomBarShape
                 dataKey="Android"
-                stackId="a"
-                fill="#82ca9d"
-                shape={(props: any) => (
-                  <CustomBarShape
-                    dataKey="Android"
-                    activeKey={activeKey}
-                    {...props}
-                  />
-                )}
+                activeKey={activeKey}
+                {...props}
               />
-              <Bar
+            )}
+          />
+          <Bar
+            dataKey="Android/iOS"
+            stackId="a"
+            fill="#fe288b"
+            shape={(props: any) => (
+              <CustomBarShape
                 dataKey="Android/iOS"
-                stackId="a"
-                fill="#fe288b"
-                shape={(props: any) => (
-                  <CustomBarShape
-                    dataKey="Android/iOS"
-                    activeKey={activeKey}
-                    {...props}
-                  />
-                )}
+                activeKey={activeKey}
+                {...props}
               />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
+            )}
+          />
+        </BarChart>
+      </ResponsiveContainer>
       {legendHoverKey && (
-        <LegendTooltip dataKey={legendHoverKey} mousePos={mousePos} />
+        <LegendTooltip
+          data={data}
+          dataKey={legendHoverKey}
+          mousePos={mousePos}
+        />
       )}
-    </section>
+    </>
   );
 }
 
@@ -218,9 +207,11 @@ const CustomTooltip = ({ active, payload }: any) => {
 };
 
 const LegendTooltip = ({
+  data,
   dataKey,
   mousePos,
 }: {
+  data: IServiceRegistrationStatusChartProps["data"];
   dataKey: "iOS" | "Android" | "Android/iOS";
   mousePos: { x: number; y: number };
 }) => {
