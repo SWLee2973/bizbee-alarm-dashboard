@@ -35,7 +35,7 @@ function ServiceRegistrationStatusChart() {
       <h3 className="text-center mt-4 max-md:mt-2 font-semibold">
         서비스 등록 현황
       </h3>
-      <div className="w-full h-80 max-lg:h-60 max-sm:h-40 flex justify-center md:py-4">
+      <div className="w-full h-80 max-lg:h-60 max-sm:h-40 flex justify-center md:pb-4">
         <div className="w-fit aspect-square">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
@@ -53,7 +53,7 @@ function ServiceRegistrationStatusChart() {
               <XAxis dataKey="name" />
               <YAxis />
               <Tooltip content={CustomTooltip} />
-              <Legend content={CustomLegend} wrapperStyle={{ left: 0 }} />
+              <Legend content={CustomLegend} wrapperStyle={{ left: 10 }} />
               <Bar dataKey="iOS" stackId="a" fill="#8884d8" />
               <Bar dataKey="Android" stackId="a" fill="#82ca9d" />
               <Bar dataKey="Android/iOS" stackId="a" fill="#fe288b" />
