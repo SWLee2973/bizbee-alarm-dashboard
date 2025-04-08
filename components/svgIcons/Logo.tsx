@@ -1,15 +1,10 @@
 import React from "react";
+import { IconProps } from "./iconProps";
 
-interface ILogoProps {
-  width?: string;
-  height?: string;
-}
-
-function Logo({ width, height }: ILogoProps) {
+function Logo({ className }: IconProps) {
   return (
     <svg
-      width={width}
-      height={height}
+      className={className} 
       viewBox="0 0 192 163"
       xmlns="http://www.w3.org/2000/svg"
     >

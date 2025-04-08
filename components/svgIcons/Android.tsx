@@ -1,8 +1,5 @@
 import React from "react";
-
-interface IconProps {
-  className: string;
-}
+import { IconProps } from "./iconProps";
 
 function Android({ className }: IconProps) {
   return (

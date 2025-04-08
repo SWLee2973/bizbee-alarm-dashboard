@@ -2,6 +2,7 @@ import ServiceRegistrationStatusCard from "@/components/dashboard/ServiceRegistr
 import ProjectsCountCard from "@/components/dashboard/ProjectsCountCard";
 import RecentSendMessageCard from "@/components/dashboard/RecentSendMessageCard";
 import SendFailCountCard from "@/components/dashboard/SendFailCountCard";
+import SendStatusCard_ from "@/components/dashboard/SendStatusCard_";
 import SendStatusCard from "@/components/dashboard/SendStatusCard";
 import SendSuccessCountCard from "@/components/dashboard/SendSuccessCountCard";
 import TotalSendCountCard from "@/components/dashboard/TotalSendCountCard";
@@ -13,18 +14,18 @@ function DashboardPage() {
       <PageHeader title="대시보드" />
       <div className="grid grid-cols-3 max-lg:grid-cols-2 gap-4">
         <ServiceRegistrationStatusCard />
-        <ServiceRegistrationStatusCard />
+        <SendStatusCard />
         <ServiceRegistrationStatusCard />
         <ServiceRegistrationStatusCard />
         <ServiceRegistrationStatusCard />
         <ServiceRegistrationStatusCard />
       </div>
       <div className="grid grid-cols-2 lg:grid-rows-1 max-lg:grid-cols-1 gap-4">
-        <SendStatusCard />
+        <SendStatusCard_ />
         <RecentSendMessageCard />
       </div>
       <div className="grid grid-cols-2 lg:grid-rows-1 max-lg:grid-cols-1 gap-4">
-        <SendStatusCard />
+        <SendStatusCard_ />
         <RecentSendMessageCard />
       </div>
     </main>
