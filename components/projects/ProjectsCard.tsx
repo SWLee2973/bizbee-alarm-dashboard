@@ -7,7 +7,7 @@ function ProjectsCard() {
   // const { data, isLoading } = useProjects();
 
   return (
-    <section className="card bg-base-200 card-md shadow-sm rounded-md">
+    <section className="card bg-base-100 card-md shadow-lg rounded-md">
       <div className="card-body">
         <h2 className="card-title text-lg">앱</h2>
 

@@ -18,7 +18,7 @@ const data = [
 
 function ServiceRegistrationStatusCard() {
   return (
-    <section className="card bg-base-200 card-md shadow-sm rounded-md">
+    <section className="card bg-base-100 card-md shadow-lg rounded-md">
       <h3 className="text-center mt-4 max-md:mt-2 font-semibold">
         서비스 등록 현황
       </h3>
