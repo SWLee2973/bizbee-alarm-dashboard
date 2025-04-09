@@ -41,7 +41,7 @@ export default function RootLayout({
           `}
         </Script>
       </head> */}
-      <body className={`${pretendard.className} antialiased`}>
+      <body className={`${pretendard.className} antialiased bg-base-200`}>
         <QueryProvider>
           <SessionProvider>
             <Layout>{children}</Layout>
