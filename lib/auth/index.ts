@@ -24,8 +24,9 @@ export const {
 
         if (parsedCredentials.success) {
           const params = parsedCredentials.data;
-          console.log('params : ', params);
           const user = await login(params);
+
+          console.log('auth_user : ', user);
 
           if (user === null) return null;
 

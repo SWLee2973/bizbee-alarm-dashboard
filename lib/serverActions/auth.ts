@@ -7,7 +7,6 @@ export const signInWithCredentials = async (
   prevState: string | undefined,
   data: FormData
 ) => {
-  console.log('data : ', data);
   try {
     await signIn("credentials", {
       corpCd: data.get("corpCd"),

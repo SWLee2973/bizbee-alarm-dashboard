@@ -14,11 +14,16 @@ const login = async (params: ILoginParams): Promise<User | null> => {
     }
   );
 
+  console.log('response : ', response);
+
   if (!response.ok) {
     return null;
   }
 
+
   const user = (await response.json()) as User;
+
+  console.log('user : ', user);
 
   return user;
 };
