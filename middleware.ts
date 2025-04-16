@@ -14,16 +14,14 @@ const matchersForAuth = [
 ];
 const matchersForLogIn = ["/login"];
 
-export async function middleware(request: NextRequest) {
-  console.log("request:", request.nextUrl);
-  
+export async function middleware(request: NextRequest) {  
   if (isMatch(request.nextUrl.pathname, matchersForAuth)) {
     const session = await getSession();
     if (session) {
       return NextResponse.next();
     }
     // request.nextUrl.origin를 사용하여 올바른 도메인 반영
-    const callbackUrl = encodeURIComponent(request.nextUrl.href);
+    const callbackUrl = encodeURIComponent(request.nextUrl.pathname);
     return NextResponse.redirect(
       new URL(`/login?callbackUrl=${callbackUrl}`, request.nextUrl.origin)
     );

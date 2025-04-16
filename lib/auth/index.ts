@@ -20,9 +20,11 @@ export const {
             password: z.string().min(4),
           })
           .safeParse(credentials);
+          
 
         if (parsedCredentials.success) {
           const params = parsedCredentials.data;
+          console.log('params : ', params);
           const user = await login(params);
 
           if (user === null) return null;
