@@ -15,12 +15,13 @@ export const signInWithCredentials = async (
     });
   } catch (error) {
     if (error instanceof AuthError) {
+      console.log("로그인 에러 : ", error);
       switch (error.type) {
         case "CredentialsSignin":
           return "아이디나 비밀번호가 틀렸습니다.";
-        default:
-          return "로그인 도중 오류가 발생했습니다.";
-      }
+          default:
+            return "로그인 도중 오류가 발생했습니다.";
+          }
     }
 
     throw error;

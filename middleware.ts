@@ -13,19 +13,28 @@ const matchersForAuth = [
   "/users/*all",
 ];
 const matchersForLogIn = ["/login"];
+
 export async function middleware(request: NextRequest) {
+  console.log("request:", request.nextUrl);
+  
   if (isMatch(request.nextUrl.pathname, matchersForAuth)) {
-    return (await getSession())
-      ? NextResponse.next()
-      : NextResponse.redirect(
-          new URL(`/login?callbackUrl=${request.url}`, request.url)
-        );
+    const session = await getSession();
+    if (session) {
+      return NextResponse.next();
+    }
+    // request.nextUrl.origin를 사용하여 올바른 도메인 반영
+    const callbackUrl = encodeURIComponent(request.nextUrl.href);
+    return NextResponse.redirect(
+      new URL(`/login?callbackUrl=${callbackUrl}`, request.nextUrl.origin)
+    );
   }
 
   if (isMatch(request.nextUrl.pathname, matchersForLogIn)) {
-    return (await getSession())
-      ? NextResponse.redirect(new URL("/dashboard", request.url))
-      : NextResponse.next();
+    const session = await getSession();
+    if (session) {
+      return NextResponse.redirect(new URL("/dashboard", request.nextUrl.origin));
+    }
+    return NextResponse.next();
   }
 
   return NextResponse.next();
