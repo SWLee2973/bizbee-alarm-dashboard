@@ -12,7 +12,51 @@
     "build:electron": "vite build -c vite.config.electron.ts",
     "vite": "vite",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:mac": "electron-builder --mac",
+    "deploy:win32": "electron-builder --win nsis:ia32",
+    "deploy:win64": "electron-builder --win nsis:x64",
+    "deploy:electron": "pnpm build:electron && pnpm deploy:win32 && pnpm deploy:win64 && pnpm deploy:mac"
+  },
+  "main": "dist/main.mjs",
+  "build": {
+    "productName": "Bizbee Notice",
+    "appId": "bizbee.notice.electronApp",
+    "asar": true,
+    "mac": {
+      "target": [
+        "default"
+      ]
+    },
+    "dmg": {
+      "title": "Bizbee Notice"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": false,
+      "createDesktopShortcut": true
+    },
+    "directories": {
+      "buildResources": "./resources/installer/",
+      "output": "./dist/",
+      "app": "."
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",  
+      "package.json"
+    ]
   },
   "dependencies": {
     "@auth/core": "^0.38.0",
@@ -45,6 +89,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.23.0",
+    "@next/eslint-plugin-next": "^15.3.1",
     "@svgr/webpack": "^8.1.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
@@ -54,9 +99,9 @@
     "@typescript-eslint/parser": "^8.29.0",
     "daisyui": "^5.0.0",
     "electron": "^35.0.1",
+    "electron-builder": "^26.0.12",
     "eslint": "^9.23.0",
     "eslint-config-prettier": "^10.1.1",
-    "eslint-plugin-next": "^0.0.0",
     "eslint-plugin-react-hooks": "^5.2.0",
     "globals": "^16.0.0",
     "json-server": "1.0.0-beta.3",
@@ -70,6 +115,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "electron",
+      "electron-winstaller",
       "esbuild",
       "sharp"
     ]

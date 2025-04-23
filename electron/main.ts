@@ -9,7 +9,7 @@ function createWindow() {
     useContentSize: true,
   });
 
-  mainWindow.loadURL("http://localhost:3000");
+  mainWindow.loadURL("https://admin-notice.bizbee.co.kr/");
   mainWindow.webContents.openDevTools();
 
   mainWindow.on("closed", () => {
