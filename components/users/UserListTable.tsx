@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useMemo } from "react";
 import {
   createColumnHelper,
   flexRender,
@@ -8,10 +7,11 @@ import {
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useMemo } from "react";
 
-import { useRouter } from "next/navigation";
 import { IUserTableRow } from "@/types";
-import clsx from "clsx";
+import { useRouter } from "next/navigation";
+import UserListTablePagination from "./UserListTablePagination";
 
 interface IUserListTableProps {
   users: Pick<IUserTableRow, "userId" | "name" | "role">[];
@@ -58,7 +58,7 @@ function UserListTable({ users }: IUserListTableProps) {
   });
 
   return (
-    <div className="flex flex-col rounded-md overflow-hidden justify-between flex-1 shadow-md">
+    <div className="flex flex-col rounded-md overflow-hidden justify-between flex-1 shadow-md bg-base-100">
       <table className="table">
         <thead>
           {table.getHeaderGroups().map((headerGroup) => (
@@ -71,9 +71,9 @@ function UserListTable({ users }: IUserListTableProps) {
                   {header.isPlaceholder
                     ? null
                     : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
                 </th>
               ))}
             </tr>
@@ -105,36 +105,7 @@ function UserListTable({ users }: IUserListTableProps) {
           )}
         </tbody>
       </table>
-      <div className="flex mb-20 justify-center">
-        <div className="join rounded-md">
-          {/* {table.getState().pagination.pageIndex + 1}
-          {`[${table.getFilteredRowModel().rows.length}]`} */}
-          <button
-            className={clsx("join-item btn", {
-              "btn-disable": table.getState().pagination.pageIndex === 0,
-            })}
-            onClick={() => table.setPageIndex(0)}
-          >
-            이전
-          </button>
-          <button
-            className={clsx("join-item btn", {
-              "btn-active": table.getState().pagination.pageIndex === 0,
-            })}
-            onClick={() => table.setPageIndex(0)}
-          >
-            1
-          </button>
-          <button
-            className={clsx("join-item btn", {
-              "btn-active": table.getState().pagination.pageIndex === 0,
-            })}
-            onClick={() => table.setPageIndex(0)}
-          >
-            다음
-          </button>
-        </div>
-      </div>
+      <UserListTablePagination table={table} />
     </div>
   );
 }
