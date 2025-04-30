@@ -3,8 +3,14 @@ import Form from "next/form";
 import Input from "../ui/Input";
 // import SearchIcon from "@/assets/svg/search.svg";
 import SearchButton from "../ui/SearchButton";
+import Link from "next/link";
+import ResetButton from "../ui/ResetButton";
 
-function UserSearch() {
+interface IUserSearchProps {
+  searchText?: string;
+}
+
+function UserSearch({ searchText }: IUserSearchProps) {
   return (
     <Form action="/users" className="flex items-center gap-2">
       <Input
@@ -32,6 +38,7 @@ function UserSearch() {
         className="w-full"
       />
       <SearchButton />
+      {searchText && <ResetButton href="/users" />}
     </Form>
   );
 }

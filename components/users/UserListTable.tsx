@@ -6,12 +6,16 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   useReactTable,
+  ColumnFiltersState,
+  getFilteredRowModel,
+  getFacetedUniqueValues,
 } from "@tanstack/react-table";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import { IUserTableRow } from "@/types";
 import { useRouter } from "next/navigation";
 import UserListTablePagination from "./UserListTablePagination";
+import Filter from "@/components/react-table/Filter";
 
 interface IUserListTableProps {
   users: Pick<IUserTableRow, "userId" | "name" | "role">[];
@@ -26,6 +30,9 @@ const tableHeaderTitle: Record<keyof IUserTableRow, string> = {
 
 function UserListTable({ users }: IUserListTableProps) {
   const router = useRouter();
+
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+
   const columnHeadersArray: Array<keyof IUserTableRow> = [
     "No",
     "userId",
@@ -48,13 +55,19 @@ function UserListTable({ users }: IUserListTableProps) {
   const table = useReactTable({
     data,
     columns,
+    state: {
+      columnFilters,
+    },
     initialState: {
       pagination: {
         pageSize: 10,
       },
     },
+    onColumnFiltersChange: setColumnFilters,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
   return (
@@ -64,7 +77,7 @@ function UserListTable({ users }: IUserListTableProps) {
           {table.getHeaderGroups().map((headerGroup) => (
             <tr
               key={headerGroup.id}
-              className="bg-primary text-primary-content"
+              className="bg-primary text-primary-content "
             >
               {headerGroup.headers.map((header) => (
                 <th key={header.id}>
@@ -74,6 +87,11 @@ function UserListTable({ users }: IUserListTableProps) {
                       header.column.columnDef.header,
                       header.getContext()
                     )}
+                  {/* {header.column.getCanFilter() ? (
+                    <div className="grid place-content-center items-center max-md:hidden">
+                      <Filter column={header.column} />
+                    </div>
+                  ) : null} */}
                 </th>
               ))}
             </tr>

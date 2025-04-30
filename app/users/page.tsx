@@ -11,7 +11,7 @@ interface IUserPageProps {
 
 export async function generateMetadata() {
   return {
-    title: "bizbee Notice - 사용자 관리",
+    title: "Bizbee Notice - 사용자 관리",
   };
 }
 
@@ -28,13 +28,12 @@ async function UsersPage({ searchParams }: IUserPageProps) {
       user.name.includes(searchText ?? "") ||
       user.userId.includes(searchText ?? "")
   );
-  // console.log("users : ", users);
 
   return (
     <main className="flex-1 flex flex-col gap-y-4 h-full">
       <PageHeader title="사용자 관리" />
       <div className="flex justify-between gap-x-2">
-        <UserSearch />
+        <UserSearch searchText={searchText} />
         <Link
           href="/users/add"
           className="btn btn-square bg-secondary text-secondary-content font-semibold w-fit px-2"
