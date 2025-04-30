@@ -5,10 +5,12 @@ import {
   flexRender,
   getCoreRowModel,
   getPaginationRowModel,
+  SortingState,
   useReactTable,
   ColumnFiltersState,
   getFilteredRowModel,
   getFacetedUniqueValues,
+  getSortedRowModel,
 } from "@tanstack/react-table";
 import { useMemo, useState } from "react";
 
@@ -16,6 +18,7 @@ import { IUserTableRow } from "@/types";
 import { useRouter } from "next/navigation";
 import UserListTablePagination from "./UserListTablePagination";
 import Filter from "@/components/react-table/Filter";
+import clsx from "clsx";
 
 interface IUserListTableProps {
   users: Pick<IUserTableRow, "userId" | "name" | "role">[];
@@ -32,6 +35,12 @@ function UserListTable({ users }: IUserListTableProps) {
   const router = useRouter();
 
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      id: "No",
+      desc: false,
+    }
+  ]);
 
   const columnHeadersArray: Array<keyof IUserTableRow> = [
     "No",
@@ -43,7 +52,20 @@ function UserListTable({ users }: IUserListTableProps) {
   const columns = columnHeadersArray.map((columnName) =>
     columnHelper.accessor(columnName, {
       id: columnName,
-      header: () => tableHeaderTitle[columnName],
+      header: ({ column }) =>
+        <button
+          className={clsx(
+            "pl-1 w-full flex gap-x-2 items-center cursor-pointer",
+            { "w-10": columnName === "No" },
+            { "w-20": columnName === "role" },
+          )}
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          {tableHeaderTitle[columnName]}
+          <span className="text-[0.5rem]">
+            {column.getIsSorted() === "asc" ? "▲" : "▼"}
+          </span>
+        </button>
     })
   );
 
@@ -56,6 +78,7 @@ function UserListTable({ users }: IUserListTableProps) {
     data,
     columns,
     state: {
+      sorting,
       columnFilters,
     },
     initialState: {
@@ -64,10 +87,12 @@ function UserListTable({ users }: IUserListTableProps) {
       },
     },
     onColumnFiltersChange: setColumnFilters,
+    onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    getSortedRowModel: getSortedRowModel(),
   });
 
   return (
@@ -80,7 +105,13 @@ function UserListTable({ users }: IUserListTableProps) {
               className="bg-primary text-primary-content "
             >
               {headerGroup.headers.map((header) => (
-                <th key={header.id}>
+                <th
+                  key={header.id}
+                  className={clsx(
+                    header.column.getCanSort() && "cursor-pointer",
+                    { "w-10": header.column.id === "No" },
+                  )}
+                >
                   {header.isPlaceholder
                     ? null
                     : flexRender(
@@ -108,7 +139,11 @@ function UserListTable({ users }: IUserListTableProps) {
                 }
               >
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
+                  <td key={cell.id} className={
+                    clsx(
+                      { "text-center": cell.column.id === "No" },
+                    )
+                  }>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
